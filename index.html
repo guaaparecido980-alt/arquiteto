@@ -284,7 +284,9 @@ body::after{
    ABOUT 2.0 — BIOGRAPHY
    ═══════════════════════════════════════════════════════ */
 .about-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(3rem,6vw,6rem);align-items:start}
-.about-img{aspect-ratio:3/4;position:sticky;top:8rem}
+.about-img{aspect-ratio:3/4;position:sticky;top:8rem;overflow:hidden}
+.about-photo{width:100%;height:100%;object-fit:cover;object-position:center top;filter:contrast(1.05) brightness(.95);transition:transform .8s var(--ease)}
+.about-img:hover .about-photo{transform:scale(1.03)}
 .about-txt .label{margin-bottom:1.5rem}
 .about-txt h2{margin-bottom:.5rem}
 .about-txt .t-body{margin-bottom:1.25rem}
@@ -815,10 +817,7 @@ body::after{
 <section class="sec" id="sobre">
   <div class="container about-grid">
     <div class="about-img rv">
-      <div class="ph ph-bg1" style="height:100%">
-        <div class="ph-icon">◇</div>
-        <p class="ph-text">Inserir foto profissional do arquiteto</p>
-      </div>
+      <img src="foto-arquiteto.jpg" alt="Wander Corrêa Aguiar — Arquiteto e Designer de Interiores" loading="lazy" class="about-photo">
     </div>
     <div class="about-txt">
       <span class="label rv">Sobre</span>
