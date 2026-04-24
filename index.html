@@ -25,7 +25,7 @@
 {
   "@context":"https://schema.org",
   "@type":"ProfessionalService",
-  "name":"Nome do Profissional — Arquitetura e Interiores",
+  "name":"Wander Corrêa Aguiar — Arquitetura e Interiores",
   "description":"Projetos residenciais e comerciais de alto padrão com arquitetura autoral, interiores sofisticados e mais de 16 anos de experiência.",
   "url":"https://www.seudominio.com.br",
   "telephone":"+5541999999999",
@@ -211,6 +211,7 @@ body::after{
 .manifesto h2{font-family:var(--ff-display);font-size:clamp(1.75rem,4vw,3rem);font-weight:300;font-style:italic;line-height:1.2;color:var(--beige);margin-bottom:2rem}
 .manifesto p{max-width:600px;margin:0 auto}
 .manifesto-accent{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;background:radial-gradient(circle,var(--gold-glow),transparent 70%);pointer-events:none}
+.manifesto-coda{font-family:var(--ff-display);font-size:clamp(1rem,1.8vw,1.25rem);font-weight:300;font-style:italic;color:var(--beige);margin-top:2.5rem;line-height:1.6;opacity:.7}
 
 /* ═══════════════════════════════════════════════════════
    AUTHORITY STRIP
@@ -280,18 +281,34 @@ body::after{
 .ba-foot h3{font-family:var(--ff-display);font-size:1.0625rem;font-weight:400;color:var(--off-white)}
 
 /* ═══════════════════════════════════════════════════════
-   ABOUT 2.0
+   ABOUT 2.0 — BIOGRAPHY
    ═══════════════════════════════════════════════════════ */
 .about-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(3rem,6vw,6rem);align-items:start}
 .about-img{aspect-ratio:3/4;position:sticky;top:8rem}
 .about-txt .label{margin-bottom:1.5rem}
-.about-txt h2{margin-bottom:2rem}
-.about-txt .t-body{margin-bottom:1.5rem}
-.about-quote{font-family:var(--ff-display);font-size:clamp(1.125rem,1.8vw,1.375rem);font-weight:300;font-style:italic;color:var(--beige);padding:1.5rem 0 1.5rem 1.5rem;border-left:1px solid var(--gold);margin:2rem 0 2.5rem;line-height:1.5}
-.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-.about-stat{background:var(--black);padding:1.5rem}
-.about-stat-v{font-family:var(--ff-display);font-size:1.625rem;font-weight:300;color:var(--gold);margin-bottom:.25rem}
-.about-stat-l{font-family:var(--ff-label);font-size:.5625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--stone)}
+.about-txt h2{margin-bottom:.5rem}
+.about-txt .t-body{margin-bottom:1.25rem}
+.about-role{font-family:var(--ff-label);font-size:.625rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:2.5rem}
+
+/* Highlights strip */
+.about-highlights{display:flex;gap:0;margin-top:2.5rem;border:1px solid var(--border)}
+.about-hl{flex:1;padding:1.25rem 1.5rem;text-align:center;display:flex;flex-direction:column;gap:.25rem}
+.about-hl+.about-hl{border-left:1px solid var(--border)}
+.about-hl-val{font-family:var(--ff-display);font-size:1.5rem;font-weight:300;color:var(--gold);line-height:1.2}
+.about-hl-label{font-family:var(--ff-label);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--stone)}
+
+/* ═══════════════════════════════════════════════════════
+   ABOUT — SIGNATURE BLOCK
+   ═══════════════════════════════════════════════════════ */
+.signature-sec{padding:clamp(5rem,10vw,8rem) 0;background:var(--surface);position:relative}
+.signature-inner{max-width:760px;margin:0 auto;text-align:center}
+.signature-inner .label{margin-bottom:2rem}
+.signature-text{font-size:clamp(.9375rem,1.2vw,1.0625rem);line-height:1.9;color:var(--stone);margin-bottom:1.5rem;max-width:660px;margin-left:auto;margin-right:auto}
+.signature-text em{font-style:normal;color:var(--beige);font-weight:500}
+.signature-quote{font-family:var(--ff-display);font-size:clamp(1.125rem,2vw,1.5rem);font-weight:300;font-style:italic;line-height:1.45;color:var(--beige);margin:2.5rem auto;padding:2rem 0;max-width:600px;position:relative}
+.signature-quote::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:40px;height:1px;background:var(--gold);opacity:.4}
+.signature-quote::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40px;height:1px;background:var(--gold);opacity:.4}
+.signature-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);opacity:.25;margin:2rem auto}
 
 /* ═══════════════════════════════════════════════════════
    TIMELINE 2.0 — HORIZONTAL DESKTOP / VERTICAL MOBILE
@@ -494,6 +511,8 @@ body::after{
   .p-card:nth-child(3){grid-column:1/3}.p-card:nth-child(4){grid-column:3/5}.p-card:nth-child(5){grid-column:5/7}
   .p-card:nth-child(6){grid-column:1/4}
   .about-grid{grid-template-columns:1fr}.about-img{position:static;max-height:500px}
+  .about-highlights{flex-direction:row}
+  .signature-inner{max-width:100%}
   .diff-grid{grid-template-columns:repeat(2,1fr)}.diff-card:nth-child(2){border-right:none}
   .diff-card:nth-child(4){border-right:1px solid var(--border);border-bottom:none}
   .proc-grid{grid-template-columns:repeat(2,1fr)}
@@ -507,6 +526,7 @@ body::after{
   .p-card:nth-child(n){grid-column:auto!important;grid-row:auto!important}
   .p-card-img,.p-card:nth-child(1) .p-card-img,.p-card:nth-child(6) .p-card-img{aspect-ratio:16/10}
   .p-card-over{opacity:1}
+  .p-card-info{display:none}
   .ba-wrap{grid-template-columns:1fr}
   .diff-grid{grid-template-columns:1fr}
   .diff-card{border-right:none!important;border-bottom:1px solid var(--border)!important}
@@ -519,7 +539,7 @@ body::after{
   .footer-bottom{flex-direction:column;text-align:center}
   .footer-lgpd{text-align:center}
   .modal-gal{grid-template-columns:1fr}
-  .tl-track{flex-direction:column}
+  .tl-track{flex-direction:column;-webkit-mask-image:none;mask-image:none}
   .tl-track::before{display:none}
   .tl-item{min-width:auto;padding:0 0 2rem 2rem;border-left:1px solid var(--border)}
   .tl-dot{position:absolute;left:-4px;top:0;margin:0}
@@ -533,6 +553,8 @@ body::after{
   .cta-btns{flex-direction:column;align-items:center}
   .cta-btns .btn{width:100%;justify-content:center}
   .about-stats{grid-template-columns:1fr}
+  .about-highlights{flex-direction:column}
+  .about-hl+.about-hl{border-left:none;border-top:1px solid var(--border)}
   .auth-grid{grid-template-columns:1fr}
   .auth-item+.auth-item{border-left:none;border-top:1px solid var(--border)}
 }
@@ -616,7 +638,8 @@ body::after{
   <div class="manifesto-accent" aria-hidden="true"></div>
   <div class="container manifesto-inner">
     <h2 class="rv">Luxo não é excesso.<br>É intenção.</h2>
-    <p class="t-body rv rv-d1">Um espaço sofisticado não nasce da quantidade de elementos, mas da precisão das escolhas. Proporção, luz, textura, silêncio visual e identidade constroem ambientes que atravessam tendências.</p>
+    <p class="t-body rv rv-d1">Um espaço sofisticado não nasce da quantidade de elementos, mas da precisão das escolhas. Proporção, luz, textura e identidade constroem ambientes que permanecem.</p>
+    <p class="manifesto-coda rv rv-d2">Cada projeto é uma leitura.<br>E cada leitura, uma assinatura.</p>
   </div>
 </section>
 
@@ -787,47 +810,59 @@ body::after{
   </div>
 </section>
 
-<!-- ══════ ABOUT 2.0 ══════ -->
+<!-- ══════ SOBRE — BLOCO 1: BIOGRAFIA ══════ -->
 <div class="divider"></div>
 <section class="sec" id="sobre">
   <div class="container about-grid">
     <div class="about-img rv">
       <div class="ph ph-bg1" style="height:100%">
         <div class="ph-icon">◇</div>
-        <p class="ph-text">Inserir foto profissional — postura, iluminação e fundo sofisticado</p>
+        <p class="ph-text">Inserir foto profissional do arquiteto</p>
       </div>
     </div>
     <div class="about-txt">
       <span class="label rv">Sobre</span>
-      <h2 class="t-xl rv rv-d1">Um olhar construído por experiência, repertório e obra.</h2>
-      <p class="t-body rv rv-d2">Mais do que uma assinatura estética, sua trajetória reúne prática, vivência e consistência. Ao longo de mais de 16 anos, desenvolveu projetos de interiores e arquitetura autorais, passando pela criação, execução e gerenciamento de obras — uma combinação que permite pensar beleza, viabilidade e permanência com a mesma precisão.</p>
-      <blockquote class="about-quote rv rv-d3">"A estética só tem valor quando sustenta uma experiência real de viver, receber ou trabalhar."</blockquote>
-      <div class="about-stats rv rv-d4">
-        <div class="about-stat">
-          <p class="about-stat-v">+16</p>
-          <p class="about-stat-l">Anos de experiência</p>
+      <h2 class="t-xl rv rv-d1">Wander Corrêa Aguiar</h2>
+      <p class="about-role rv rv-d2">Arquiteto & Designer de Interiores</p>
+
+      <p class="t-body rv rv-d2">Nascido em Curitiba, em 1º de agosto de 1969, em uma família com raízes espanholas e portuguesas, cuja trajetória empreendedora no interior do Paraná contribuiu para a formação de uma base sólida, marcada por visão, estrutura e construção de legado.</p>
+
+      <p class="t-body rv rv-d3">Formado em Psicologia aos 24 anos, desenvolveu uma percepção apurada sobre comportamento, estética e vivência dos espaços — elementos que, ao longo do tempo, direcionaram sua atuação para a arquitetura e o design de interiores.</p>
+
+      <p class="t-body rv rv-d3">Com mais de 16 anos de experiência, consolidou sua carreira na criação de projetos residenciais e comerciais de alto padrão, com foco na valorização do imóvel, identidade estética e qualidade de execução.</p>
+
+      <p class="t-body rv rv-d4">Sua trajetória inclui participações em mostras como a Casa Cor, além de reconhecimento internacional com destaque no Salone del Mobile.Milano.</p>
+
+      <p class="t-body rv rv-d4">Ao longo dos anos, também desenvolveu peças de mobiliário autoral, ampliando a exclusividade e autenticidade de seus projetos.</p>
+
+      <div class="about-highlights rv rv-d5">
+        <div class="about-hl">
+          <span class="about-hl-val">+16</span>
+          <span class="about-hl-label">Anos de experiência</span>
         </div>
-        <div class="about-stat">
-          <p class="about-stat-v">100+</p>
-          <p class="about-stat-l">Projetos autorais</p>
+        <div class="about-hl">
+          <span class="about-hl-val">Casa Cor</span>
+          <span class="about-hl-label">Participação em mostras</span>
         </div>
-        <div class="about-stat">
-          <p class="about-stat-v">360°</p>
-          <p class="about-stat-l">Projeto + Obra + Gestão</p>
-        </div>
-        <div class="about-stat">
-          <p class="about-stat-v">3×</p>
-          <p class="about-stat-l">Casa Cor</p>
-        </div>
-        <div class="about-stat">
-          <p class="about-stat-v">Milão</p>
-          <p class="about-stat-l">Reconhecimento 2009</p>
-        </div>
-        <div class="about-stat">
-          <p class="about-stat-v">Premium</p>
-          <p class="about-stat-l">Público alto padrão</p>
+        <div class="about-hl">
+          <span class="about-hl-val">Milão</span>
+          <span class="about-hl-label">Reconhecimento internacional</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SOBRE — BLOCO 2: ASSINATURA ══════ -->
+<section class="signature-sec">
+  <div class="container">
+    <div class="signature-inner rv">
+      <div class="signature-line" aria-hidden="true"></div>
+      <span class="label rv" style="justify-content:center">Assinatura</span>
+      <p class="signature-text rv rv-d1">Seu trabalho é marcado por uma linguagem contemporânea, onde o <em>luxo</em> é tratado com <em>equilíbrio</em>, leveza e <em>intenção</em>.</p>
+      <p class="signature-text rv rv-d2">Linhas limpas, materiais refinados, texturas bem definidas e uma composição cuidadosa criam espaços sofisticados, mas sempre funcionais e conectados ao estilo de vida de cada cliente.</p>
+      <blockquote class="signature-quote rv rv-d3">Cada projeto nasce de uma leitura estratégica — unindo estética, proporção e execução — resultando em ambientes que não apenas impressionam, mas permanecem.</blockquote>
+      <div class="signature-line" aria-hidden="true"></div>
     </div>
   </div>
 </section>
