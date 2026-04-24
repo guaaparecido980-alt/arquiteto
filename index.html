@@ -192,10 +192,26 @@ body::after{
 .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem}
 .hero-micro{font-family:var(--ff-label);font-size:.5625rem;letter-spacing:.12em;color:rgba(138,133,128,.5);text-transform:uppercase}
 
-/* Right image */
+/* Right image — editorial composition */
 .hero-right{position:relative;z-index:1}
-.hero-img-wrap{height:100%;min-height:100vh}
-.hero-img-wrap .ph{height:100%}
+.hero-img-wrap{height:100%;min-height:100vh;position:relative;overflow:hidden}
+.hero-photo{width:100%;height:100%;object-fit:cover;object-position:center 15%;filter:contrast(1.08) brightness(.85) saturate(.9);transition:transform 8s var(--ease)}
+.hero-img-wrap:hover .hero-photo{transform:scale(1.04)}
+.hero-photo-overlay{position:absolute;inset:0;background:linear-gradient(to right,var(--black) 0%,rgba(8,8,8,.4) 20%,rgba(8,8,8,.05) 50%,rgba(8,8,8,.2) 100%);pointer-events:none}
+.hero-photo-overlay::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.7) 0%,transparent 30%,transparent 80%,rgba(8,8,8,.3) 100%);pointer-events:none}
+
+/* Credentials strip at bottom of hero image */
+.hero-credentials{position:absolute;bottom:4rem;left:2rem;right:2rem;display:flex;align-items:center;justify-content:center;gap:0;padding:1.25rem 2rem;background:rgba(8,8,8,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.06);z-index:2}
+.hero-cred-item{text-align:center;flex:1;padding:0 1rem}
+.hero-cred-val{display:block;font-family:var(--ff-display);font-size:clamp(1.125rem,2vw,1.5rem);font-weight:300;color:var(--off-white);line-height:1.2;margin-bottom:.2rem}
+.hero-cred-label{display:block;font-family:var(--ff-label);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--stone)}
+.hero-cred-divider{width:1px;height:32px;background:rgba(183,154,99,.25);flex-shrink:0}
+
+/* Corner tag */
+.hero-corner-tag{position:absolute;top:2rem;right:2rem;text-align:right;z-index:2}
+.hero-corner-tag span{display:block}
+.hero-corner-tag span:first-child{font-family:var(--ff-display);font-size:.9375rem;font-weight:400;color:var(--off-white);margin-bottom:.15rem}
+.hero-corner-tag span:last-child{font-family:var(--ff-label);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.7}
 
 /* Scroll indicator */
 .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.75rem;z-index:2}
@@ -566,7 +582,7 @@ body::after{
 
 <!-- ══════ LOADER ══════ -->
 <div class="loader" id="loader">
-  <div class="loader-mark">Arquitetura Autoral</div>
+  <div class="loader-mark">Wander Corrêa Aguiar</div>
   <div class="loader-bar"></div>
 </div>
 
@@ -574,7 +590,7 @@ body::after{
 <header class="hd" id="hd" role="banner">
   <div class="container hd-inner">
     <a href="#inicio" class="logo" aria-label="Início">
-      <span class="logo-name">Nome do Profissional</span>
+      <span class="logo-name">Wander Corrêa Aguiar</span>
       <span class="logo-sub">Arquitetura & Interiores</span>
     </a>
     <nav class="nav-d" aria-label="Menu principal">
@@ -622,9 +638,29 @@ body::after{
   </div>
   <div class="hero-right">
     <div class="hero-img-wrap">
-      <div class="ph ph-bg1">
-        <div class="ph-icon">◇</div>
-        <p class="ph-text">Inserir imagem principal do arquiteto ou projeto destaque</p>
+      <img src="foto-arquiteto.jpg" alt="Wander Corrêa Aguiar na Galleria Vittorio Emanuele II, Milão" class="hero-photo" loading="eager">
+      <div class="hero-photo-overlay"></div>
+      <!-- Editorial badges over image -->
+      <div class="hero-credentials">
+        <div class="hero-cred-item">
+          <span class="hero-cred-val">+16</span>
+          <span class="hero-cred-label">Anos</span>
+        </div>
+        <div class="hero-cred-divider"></div>
+        <div class="hero-cred-item">
+          <span class="hero-cred-val">Casa Cor</span>
+          <span class="hero-cred-label">CWB · SP · SC</span>
+        </div>
+        <div class="hero-cred-divider"></div>
+        <div class="hero-cred-item">
+          <span class="hero-cred-val">Milão</span>
+          <span class="hero-cred-label">Salone 2009</span>
+        </div>
+      </div>
+      <!-- Corner accent -->
+      <div class="hero-corner-tag">
+        <span>Wander Corrêa Aguiar</span>
+        <span>Arquitetura & Interiores Autorais</span>
       </div>
     </div>
   </div>
@@ -1088,7 +1124,7 @@ body::after{
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo"><span class="logo-name">Nome do Profissional</span><span class="logo-sub">Arquitetura & Interiores Autorais</span></div>
+        <div class="logo"><span class="logo-name">Wander Corrêa Aguiar</span><span class="logo-sub">Arquitetura & Interiores Autorais</span></div>
         <p class="footer-desc">Projetos residenciais e comerciais de alto padrão com visão autoral, repertório internacional e experiência em execução.</p>
       </div>
       <div class="footer-col"><h4>Navegação</h4><a href="#inicio">Início</a><a href="#portfolio">Projetos</a><a href="#sobre">Sobre</a><a href="#processo">Processo</a><a href="#trajetoria">Trajetória</a></div>
@@ -1096,7 +1132,7 @@ body::after{
       <div class="footer-col"><h4>Legal</h4><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a><a href="#">Cookies</a></div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">&copy; 2026 Nome do Profissional. Todos os direitos reservados.</p>
+      <p class="footer-copy">&copy; 2026 Wander Corrêa Aguiar. Todos os direitos reservados.</p>
       <p class="footer-lgpd">Ao enviar suas informações, você autoriza o contato para retorno sobre seu projeto, conforme nossa Política de Privacidade.</p>
     </div>
   </div>
