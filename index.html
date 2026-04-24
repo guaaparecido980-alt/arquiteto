@@ -177,6 +177,9 @@ body::after{
 .nav-m a:nth-child(5){transition-delay:.28s}
 .nav-m a:nth-child(6){transition-delay:.33s}
 .nav-m a:nth-child(7){transition-delay:.38s}
+.nav-m-cta{margin-top:2rem;font-family:var(--ff-label);font-size:.6875rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);padding:1rem 2.5rem;border:1px solid rgba(183,154,99,.3);transition:all .4s var(--ease),opacity .5s .42s,transform .5s .42s;opacity:0;transform:translateY(20px)}
+.nav-m.open .nav-m-cta{opacity:1;transform:translateY(0)}
+.nav-m-cta:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
 
 /* ═══════════════════════════════════════════════════════
    HERO 2.0 — FULL SCREEN EDITORIAL
@@ -521,6 +524,7 @@ body::after{
   .hero{grid-template-columns:1fr}.hero-right{display:none}
   .hero-left{padding-top:7rem;padding-bottom:6rem}
   .hero-vertical{display:none}
+  .hero-scroll{display:none}
   .auth-grid{grid-template-columns:repeat(2,1fr)}
   .auth-item+.auth-item{border-left:1px solid var(--border)}
   .auth-item:nth-child(3){border-left:none}
@@ -615,7 +619,7 @@ body::after{
   <a href="#processo">Processo</a>
   <a href="#trajetoria">Trajetória</a>
   <a href="#faq">Contato</a>
-  <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:1rem">Solicitar análise</a>
+  <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." target="_blank" rel="noopener" class="nav-m-cta">Solicitar análise →</a>
 </nav>
 
 <!-- ══════════════════════════════════════════════════════
