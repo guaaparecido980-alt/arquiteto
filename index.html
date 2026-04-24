@@ -75,6 +75,7 @@
 }
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{font-family:var(--ff-body);font-weight:400;font-size:16px;line-height:1.7;color:var(--off-white);background:var(--black);overflow-x:hidden;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+html.no-scroll,html.no-scroll body{overflow:hidden;height:100%;position:fixed;width:100%}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
 button{cursor:pointer;border:none;background:none;font-family:inherit;-webkit-tap-highlight-color:transparent;-webkit-appearance:none}
@@ -1122,26 +1123,26 @@ body::after{
 (function(){'use strict';
 
 // Loader
-window.addEventListener('load',function(){setTimeout(function(){document.getElementById('loader').classList.add('done')},900)});
+window.addEventListener('load',function(){
+  setTimeout(function(){document.getElementById('loader').classList.add('done')},900);
+  // Safety: ensure page is scrollable after load
+  document.documentElement.classList.remove('no-scroll');
+});
 
 // Header scroll
 var hd=document.getElementById('hd');
 window.addEventListener('scroll',function(){hd.classList.toggle('scrolled',window.pageYOffset>60)},{passive:true});
 
-// iOS-safe scroll lock helper
+// iOS-safe scroll lock via CSS class on html element
 var scrollPos=0;
 function lockScroll(){
   scrollPos=window.pageYOffset;
-  document.body.style.overflow='hidden';
-  document.body.style.position='fixed';
+  document.documentElement.classList.add('no-scroll');
   document.body.style.top=-scrollPos+'px';
-  document.body.style.width='100%';
 }
 function unlockScroll(){
-  document.body.style.overflow='';
-  document.body.style.position='';
+  document.documentElement.classList.remove('no-scroll');
   document.body.style.top='';
-  document.body.style.width='';
   window.scrollTo(0,scrollPos);
 }
 
