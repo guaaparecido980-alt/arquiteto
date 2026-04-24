@@ -657,7 +657,7 @@ body::after{
   <a href="#sobre">Sobre</a>
   <a href="#processo">Processo</a>
   <a href="#trajetoria">Trajetória</a>
-  <a href="#faq">Contato</a>
+  <a href="#contato">Contato</a>
   <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." target="_blank" rel="noopener" class="nav-m-cta">Solicitar análise →</a>
 </nav>
 
@@ -675,7 +675,7 @@ body::after{
       Projetos residenciais e comerciais de alto padrão, desenvolvidos com repertório internacional, precisão estética e mais de 16 anos de experiência em interiores, arquitetura e execução.
     </p>
     <div class="hero-ctas rv rv-d2">
-      <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." target="_blank" rel="noopener" class="btn btn-gold">Apresentar meu projeto</a>
+      <a href="#contato" class="btn btn-gold">Apresentar meu projeto</a>
       <a href="#portfolio" class="btn btn-ghost">Explorar portfólio</a>
     </div>
     <p class="hero-micro rv rv-d3">Atendimento seletivo para projetos residenciais e comerciais de alto padrão.</p>
@@ -1081,9 +1081,68 @@ body::after{
       <p class="t-body rv rv-d2">Apresente o contexto do seu projeto e receba um primeiro direcionamento sobre possibilidades, estilo e escopo.</p>
       <div class="cta-btns rv rv-d3">
         <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." class="btn btn-gold" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
-        <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." target="_blank" rel="noopener" class="btn btn-ghost">Solicitar análise inicial</a>
+        <a href="#contato" class="btn btn-ghost">Solicitar análise inicial</a>
       </div>
       <p class="hero-micro rv rv-d4">Atendimento mediante disponibilidade e alinhamento com o perfil do projeto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FORMULÁRIO PREMIUM ══════ -->
+<div class="divider"></div>
+<section class="sec" id="contato">
+  <div class="container form-grid">
+    <div class="form-info">
+      <span class="label rv">Contato</span>
+      <h2 class="t-xl rv rv-d1">Apresente seu projeto.</h2>
+      <p class="t-body rv rv-d2">Preencha o briefing inicial com as informações do seu projeto. Quanto mais contexto, melhor será a análise inicial.</p>
+      <div class="form-contact rv rv-d3">
+        <div class="form-contact-item">
+          <p class="form-contact-label">WhatsApp</p>
+          <p class="form-contact-val"><a href="https://wa.me/5541999999999" target="_blank" rel="noopener">(41) 99999-9999</a></p>
+        </div>
+        <div class="form-contact-item">
+          <p class="form-contact-label">E-mail</p>
+          <p class="form-contact-val"><a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a></p>
+        </div>
+        <div class="form-contact-item">
+          <p class="form-contact-label">Instagram</p>
+          <p class="form-contact-val"><a href="https://www.instagram.com/seuperfil" target="_blank" rel="noopener">@seuperfil</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="form-wrap rv rv-d2">
+      <p class="form-title">Briefing do Projeto</p>
+      <p class="form-subtitle">Quanto mais contexto você enviar, melhor será a análise inicial.</p>
+      <form id="cForm" novalidate>
+        <div class="f-row">
+          <div class="fg"><label class="fl" for="fn">Nome completo</label><input type="text" id="fn" class="fi" placeholder="Seu nome" required></div>
+          <div class="fg"><label class="fl" for="fw">WhatsApp</label><input type="tel" id="fw" class="fi" placeholder="(00) 00000-0000" required></div>
+        </div>
+        <div class="fg"><label class="fl" for="fc">Cidade</label><input type="text" id="fc" class="fi" placeholder="Cidade / Estado"></div>
+        <div class="f-row">
+          <div class="fg"><label class="fl" for="ft2">Tipo de projeto</label>
+            <select id="ft2" class="fs"><option value="">Selecione</option><option>Residencial</option><option>Comercial</option><option>Interiores</option><option>Reforma</option><option>Outro</option></select>
+          </div>
+          <div class="fg"><label class="fl" for="fe">Estágio do projeto</label>
+            <select id="fe" class="fs"><option value="">Selecione</option><option>Ideia inicial</option><option>Tenho imóvel</option><option>Quero reformar</option><option>Obra em andamento</option><option>Preciso reposicionar meu espaço</option></select>
+          </div>
+        </div>
+        <div class="f-row">
+          <div class="fg"><label class="fl" for="fp">Perfil desejado</label>
+            <select id="fp" class="fs"><option value="">Selecione</option><option>Sofisticado</option><option>Minimalista</option><option>Luxuoso</option><option>Contemporâneo</option><option>Autoral</option><option>Ainda não sei</option></select>
+          </div>
+          <div class="fg"><label class="fl" for="ff">Faixa de investimento</label>
+            <select id="ff" class="fs"><option value="">Selecione</option><option>A definir</option><option>Médio padrão</option><option>Alto padrão</option><option>Projeto exclusivo</option></select>
+          </div>
+        </div>
+        <div class="fg"><label class="fl" for="fm">Mensagem</label><textarea id="fm" class="ft" placeholder="Descreva brevemente o que você tem em mente..."></textarea></div>
+        <button type="submit" class="f-submit">Enviar projeto para análise</button>
+      </form>
+      <div class="f-success" id="fSuccess">
+        <h3>Briefing recebido.</h3>
+        <p>Analisaremos o contexto do seu projeto e entraremos em contato em breve para dar os próximos passos.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1162,7 +1221,7 @@ body::after{
       <div class="modal-gal-item"><div class="ph ph-bg1" style="height:100%"><p class="ph-text">Inserir foto ambiente final</p></div></div>
       <div class="modal-gal-item"><div class="ph ph-bg2" style="height:100%"><p class="ph-text">Inserir antes/depois</p></div></div>
     </div>
-    <div class="modal-cta"><a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." target="_blank" rel="noopener" class="btn btn-gold" id="mCTA">Solicitar projeto com essa abordagem</a></div>
+    <div class="modal-cta"><a href="#contato" class="btn btn-gold" id="mCTA">Solicitar projeto com essa abordagem</a></div>
   </div>
 </div>
 
@@ -1252,6 +1311,10 @@ document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('clic
 document.querySelectorAll('a[href^="#"]').forEach(function(l){l.addEventListener('click',function(e){
   var t=document.querySelector(l.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
 })});
+
+// Form
+var form=document.getElementById('cForm'),suc=document.getElementById('fSuccess');
+if(form){form.addEventListener('submit',function(e){e.preventDefault();form.style.display='none';suc.classList.add('show')})}
 
 // Cookie consent
 var cookieBanner=document.getElementById('cookieBanner');
