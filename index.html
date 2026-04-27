@@ -163,10 +163,13 @@ body::after{
 .hd{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 0;transition:padding .3s,background .3s,border-color .3s;will-change:transform;transform:translateZ(0)}
 .hd.scrolled{background:rgba(255,255,255,.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:.75rem 0;border-bottom:1px solid var(--border);box-shadow:0 1px 20px rgba(0,0,0,.04)}
 .hd-inner{display:flex;align-items:center;justify-content:space-between}
-.logo{z-index:1001;display:block}
-.logo-img{height:90px;width:auto;object-fit:contain;transition:opacity .3s}
+.logo{z-index:1001;display:flex;align-items:center;gap:.875rem;text-decoration:none}
+.logo-img{height:55px;width:auto;object-fit:contain}
 .logo:hover .logo-img{opacity:.8}
-.logo-img-footer{height:100px}
+.logo-text{display:flex;flex-direction:column}
+.logo-name{font-family:var(--ff-display);font-size:1.25rem;font-weight:400;letter-spacing:.04em;color:var(--text-primary);line-height:1.15}
+.logo-sub{font-family:var(--ff-label);font-size:.5rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--stone);margin-top:2px}
+.logo-img-footer{height:60px}
 .nav-d{display:flex;align-items:center;gap:2.25rem}
 .nav-d a{font-family:var(--ff-label);font-size:.625rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);transition:color .3s;position:relative}
 .nav-d a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s var(--ease)}
@@ -579,7 +582,8 @@ body::after{
   .modal-details{grid-template-columns:1fr}
 }
 @media(max-width:768px){
-  .logo-img{height:70px}
+  .logo-img{height:45px}
+  .logo-name{font-size:1rem}
   .auth-grid{grid-template-columns:1fr 1fr}
   .port-grid{display:grid;grid-template-columns:1fr!important}
   .p-card:nth-child(n){grid-column:auto!important;grid-row:auto!important}
@@ -607,6 +611,8 @@ body::after{
   .wa{bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));right:1.25rem;width:48px;height:48px}
 }
 @media(max-width:480px){
+  .logo-text{display:none}
+  .logo-img{height:50px}
   .hero-ctas{flex-direction:column}
   .hero-ctas .btn{width:100%;justify-content:center}
   .cta-btns{flex-direction:column;align-items:center}
@@ -623,7 +629,7 @@ body::after{
 
 <!-- ══════ LOADER ══════ -->
 <div class="loader" id="loader">
-  <img src="logo-wander.jpg" alt="" class="loader-logo">
+  <img src="logo-wander.png" alt="" class="loader-logo">
   <div class="loader-bar"></div>
 </div>
 
@@ -631,7 +637,11 @@ body::after{
 <header class="hd" id="hd" role="banner">
   <div class="container hd-inner">
     <a href="#inicio" class="logo" aria-label="Início">
-      <img src="logo-wander.jpg" alt="Wander Aguiar — Interiores & Arquitetura" class="logo-img">
+      <img src="logo-wander.png" alt="Wander Aguiar" class="logo-img">
+      <div class="logo-text">
+        <span class="logo-name">Wander Corrêa Aguiar</span>
+        <span class="logo-sub">Arquitetura & Interiores</span>
+      </div>
     </a>
     <nav class="nav-d" aria-label="Menu principal">
       <a href="#inicio">Início</a>
@@ -1172,7 +1182,13 @@ body::after{
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo"><img src="logo-wander.jpg" alt="Wander Aguiar — Interiores & Arquitetura" class="logo-img logo-img-footer"></div>
+        <div class="logo" style="display:flex;align-items:center;gap:1rem">
+          <img src="logo-wander.png" alt="Wander Aguiar" class="logo-img logo-img-footer">
+          <div class="logo-text">
+            <span class="logo-name">Wander Corrêa Aguiar</span>
+            <span class="logo-sub">Arquitetura & Interiores Autorais</span>
+          </div>
+        </div>
         <p class="footer-desc">Projetos residenciais e comerciais de alto padrão com visão autoral, repertório internacional e experiência em execução.</p>
       </div>
       <div class="footer-col"><h4>Navegação</h4><a href="#inicio">Início</a><a href="#portfolio">Projetos</a><a href="#sobre">Sobre</a><a href="#processo">Processo</a><a href="#trajetoria">Trajetória</a></div>
