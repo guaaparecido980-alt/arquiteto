@@ -119,7 +119,7 @@ body::after{
 .rv{animation:forceReveal .01s 2.5s forwards}
 
 /* ═══ TYPOGRAPHY ═══ */
-.t-hero{font-family:var(--ff-display);font-size:clamp(2rem,3.8vw,3.25rem);font-weight:300;line-height:1.15;letter-spacing:-.015em}
+.t-hero{font-family:var(--ff-display);font-size:clamp(2.25rem,4.2vw,3.75rem);font-weight:300;line-height:1.08;letter-spacing:-.02em}
 .t-xl{font-family:var(--ff-display);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;line-height:1.1;letter-spacing:-.02em}
 .t-lg{font-family:var(--ff-display);font-size:clamp(1.5rem,3vw,2.25rem);font-weight:400;line-height:1.2}
 .t-md{font-family:var(--ff-display);font-size:clamp(1.25rem,2vw,1.5rem);font-weight:400;line-height:1.3}
@@ -162,9 +162,9 @@ body::after{
 .hd.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:.75rem 0;border-bottom:1px solid var(--border);box-shadow:0 1px 20px rgba(0,0,0,.04)}
 .hd-inner{display:flex;align-items:center;justify-content:space-between}
 .logo{z-index:1001;display:block;text-decoration:none}
-.logo-img{height:75px;width:auto;object-fit:contain;transition:opacity .3s}
+.logo-img{height:55px;width:auto;object-fit:contain;transition:opacity .3s}
 .logo:hover .logo-img{opacity:.8}
-.logo-img-footer{height:90px}
+.logo-img-footer{height:60px}
 .nav-d{display:flex;align-items:center;gap:2.25rem}
 .nav-d a{font-family:var(--ff-label);font-size:.625rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);transition:color .3s;position:relative}
 .nav-d a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s var(--ease)}
@@ -201,13 +201,14 @@ body::after{
    HERO 2.0 — FULL SCREEN EDITORIAL
    ═══════════════════════════════════════════════════════ */
 /* ═══════════════════════════════════════════════════════
-   HERO 2.0 — PREMIUM EDITORIAL LAYOUT
+   HERO 4.0 — CLEAN MINIMALIST
    ═══════════════════════════════════════════════════════ */
-.hero{min-height:100vh;min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,7rem);align-items:center;position:relative;overflow:hidden;background:#FFFFFF;padding:9rem clamp(3rem,6vw,8rem) 5rem}
-.hero::after{content:'';position:absolute;top:50%;left:50%;width:500px;height:500px;background:radial-gradient(circle,rgba(184,154,99,.06) 0%,transparent 70%);transform:translate(-50%,-50%);pointer-events:none;z-index:0}
+.hero{min-height:100vh;min-height:100dvh;position:relative;overflow:hidden;background:#FFFFFF;padding:8rem 0 5rem}
+.hero-container{max-width:1280px;margin:0 auto;padding:0 clamp(2rem,5vw,4rem);display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(3rem,5vw,5rem);align-items:center;position:relative;z-index:1}
+.hero-num{display:none}
 
 /* Left content */
-.hero-left{position:relative;z-index:2;max-width:560px;display:flex;flex-direction:column;justify-content:center}
+.hero-left{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;max-width:600px}
 .hero-vertical{display:none}
 .hero .t-hero{color:#1A1A1A}
 .hero h1 em{font-style:italic;color:var(--gold)}
@@ -220,17 +221,34 @@ body::after{
 .hero .btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
 .hero-micro{font-family:var(--ff-label);font-size:.5625rem;letter-spacing:.12em;color:rgba(107,101,96,.45);text-transform:uppercase}
 
-/* Right image — premium editorial card with frame accent */
-.hero-right{position:relative;z-index:1;display:flex;justify-content:center;align-items:center;padding:1.5rem}
-.hero-right::before{content:'';position:absolute;top:0;right:1.5rem;bottom:3rem;left:3rem;border:1px solid rgba(184,154,99,.25);z-index:0;pointer-events:none}
-.hero-img-wrap{width:100%;max-width:440px;position:relative;border-radius:4px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.18),0 8px 24px rgba(0,0,0,.08);z-index:1;transform:translate(-1.5rem,1.5rem)}
-.hero-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 8%;display:block;filter:contrast(1.05) brightness(1.02)}
+/* Right image — clean premium card */
+.hero-right{position:relative;z-index:1;display:flex;justify-content:center;align-items:center}
+.hero-img-wrap{width:100%;max-width:460px;position:relative;z-index:1;border-radius:6px;overflow:hidden;box-shadow:0 30px 60px -15px rgba(0,0,0,.25),0 12px 24px -8px rgba(0,0,0,.1)}
+.hero-photo-inner{position:relative;overflow:hidden}
+.hero-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 8%;display:block}
+
+/* Premium gradient overlay at bottom */
+.hero-photo-inner::after{content:'';position:absolute;left:0;right:0;bottom:0;height:35%;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.4) 50%,transparent 100%);pointer-events:none;z-index:1}
+
+/* Photo caption - inside photo at bottom */
+.hero-photo-caption{position:absolute;left:0;right:0;bottom:0;padding:1.5rem 1.75rem 1.75rem;z-index:2;color:#fff}
+.hero-photo-caption .name{font-family:var(--ff-display);font-size:1.375rem;font-weight:400;line-height:1.2;margin-bottom:.25rem}
+.hero-photo-caption .role{font-family:var(--ff-label);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.95}
+
+/* +20 anos badge - top right */
+.hero-badge-num{position:absolute;top:1rem;right:1rem;width:64px;height:64px;background:rgba(0,0,0,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(184,154,99,.4);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;color:#fff}
+.hero-badge-num strong{font-family:var(--ff-display);font-size:1.125rem;font-weight:400;line-height:1;color:var(--gold)}
+.hero-badge-num span{font-family:var(--ff-label);font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:.15rem}
+
+/* Hide old elements */
+.hero-tag-bottom{display:none}
+.hero-year-badge{display:none}
 .hero-photo-overlay{position:absolute;inset:0;pointer-events:none;z-index:1;border-radius:16px}
 .hero-photo-overlay::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 50%);border-radius:16px}
 .hero-photo-overlay::after{display:none}
 
 /* Credentials strip inside photo */
-.hero-credentials{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:0;padding:1rem;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.5) 60%,transparent 100%);z-index:3}
+.hero-credentials{display:none}
 .hero-cred-item{text-align:center;flex:1;padding:0 .5rem}
 .hero-cred-val{display:block;font-family:var(--ff-display);font-size:clamp(.875rem,1.3vw,1.125rem);font-weight:300;color:#fff;line-height:1.2;margin-bottom:.1rem}
 .hero-cred-label{display:block;font-family:var(--ff-label);font-size:.4rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)}
@@ -555,12 +573,14 @@ body::after{
    ═══════════════════════════════════════════════════════ */
 @media(max-width:1024px){
   .nav-d{display:none}.ham{display:flex}
-  .hero{grid-template-columns:1fr;padding:7rem 2rem 3rem;gap:2.5rem}
+  .hero{padding:6rem 0 3rem}
+  .hero-container{grid-template-columns:1fr;gap:2.5rem;padding:0 1.5rem}
   .hero-left{max-width:100%}
-  .hero-right{max-width:340px;margin:0 auto;padding:1rem}
-  .hero-right::before{display:none}
-  .hero-img-wrap{max-width:340px;transform:none}
-  .hero-corner-tag{display:none}
+  .hero-right{max-width:340px;margin:0 auto}
+  .hero-img-wrap{max-width:340px}
+  .hero-photo-caption{padding:1.25rem}
+  .hero-photo-caption .name{font-size:1.125rem}
+  .hero-badge-num{width:54px;height:54px;top:.75rem;right:.75rem}
 
   .hero-left{padding-top:7rem;padding-bottom:6rem}
   .hero-vertical{display:none}
@@ -583,7 +603,7 @@ body::after{
   .modal-details{grid-template-columns:1fr}
 }
 @media(max-width:768px){
-  .logo-img{height:60px}
+  .logo-img{height:45px}
   .auth-grid{grid-template-columns:1fr 1fr}
   .port-grid{display:grid;grid-template-columns:1fr!important}
   .p-card:nth-child(n){grid-column:auto!important;grid-row:auto!important}
@@ -611,7 +631,7 @@ body::after{
   .wa{bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));right:1.25rem;width:48px;height:48px}
 }
 @media(max-width:480px){
-  .logo-img{height:55px}
+  .logo-img{height:42px}
   .hero-ctas{flex-direction:column}
   .hero-ctas .btn{width:100%;justify-content:center}
   .cta-btns{flex-direction:column;align-items:center}
@@ -668,11 +688,12 @@ body::after{
      HERO 2.0 — FULL SCREEN EDITORIAL
      ══════════════════════════════════════════════════════ -->
 <section class="hero" id="inicio">
+  <div class="hero-num" aria-hidden="true">01</div>
+  <div class="hero-container">
   <div class="hero-left">
-    <div class="hero-vertical" aria-hidden="true">Casa Cor · Salone del Mobile · +20 anos</div>
     <span class="hero-kicker rv">— Wander Aguiar · Designer de Interiores e Arquitetura</span>
     <h1 class="t-hero rv">
-      Designer de Interiores, e arquitetura<br>autorais para espaços que não apenas<br><em>impressionam. Permanecem.</em>
+      Designer de Interiores, e arquitetura autorais para espaços que não apenas <em>impressionam. Permanecem.</em>
     </h1>
     <p class="t-body hero-sub rv rv-d1">
       Projetos residenciais, e comerciais de alto padrão, desenvolvidos com repertórios internacionais, e com precisão, estética, e mais de 20 anos de experiência em projetos de interiores, e arquitetura.
@@ -685,26 +706,21 @@ body::after{
   </div>
   <div class="hero-right">
     <div class="hero-img-wrap">
+      <div class="hero-year-badge">
+        <strong>+20</strong>
+        <span>ANOS</span>
+      </div>
+      <div class="hero-photo-inner">
       <img src="foto-hero.jpg" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="hero-photo" loading="eager">
+      </div>
       <div class="hero-photo-overlay"></div>
       <!-- Decorative frame corners -->
       <div class="hero-frame" aria-hidden="true"></div>
       <!-- Credentials strip -->
-      <div class="hero-credentials">
-        <div class="hero-cred-item">
-          <span class="hero-cred-val">+20</span>
-          <span class="hero-cred-label">Anos</span>
-        </div>
-        <div class="hero-cred-divider"></div>
-        <div class="hero-cred-item">
-          <span class="hero-cred-val">Casa Cor</span>
-          <span class="hero-cred-label">CWB · SP · SC</span>
-        </div>
-        <div class="hero-cred-divider"></div>
-        <div class="hero-cred-item">
-          <span class="hero-cred-val">Milão</span>
-          <span class="hero-cred-label">Salone 2009</span>
-        </div>
+      </div><!-- /hero-photo-inner -->
+      <div class="hero-tag-bottom">
+        <span class="label">Curitiba · PR</span>
+        <h4>Casa Cor · Salone del Mobile · Milão</h4>
       </div>
       <!-- Corner name -->
       <div class="hero-corner-tag">
