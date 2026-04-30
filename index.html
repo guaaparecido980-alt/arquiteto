@@ -64,7 +64,7 @@
 html{
   -webkit-text-size-adjust:100%;
   text-size-adjust:100%;
-  scroll-padding-top:140px;
+  scroll-padding-top:220px;
   background:var(--bg);
 }
 
@@ -208,7 +208,7 @@ ul,ol{list-style:none}
 @keyframes bar{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
 /* ═══════════════════════════════════════════════════════════
-   HEADER (logo grande e centralizada)
+   HEADER (logo BEM GRANDE e centralizada)
    ═══════════════════════════════════════════════════════════ */
 .hd{
   position:fixed;
@@ -218,7 +218,7 @@ ul,ol{list-style:none}
   background:rgba(248,245,239,.96);
   border-bottom:1px solid transparent;
   transition:padding .3s,background-color .3s,border-color .3s,box-shadow .3s;
-  min-height:120px;
+  min-height:200px;
   display:flex;
   align-items:center;
 }
@@ -227,7 +227,7 @@ ul,ol{list-style:none}
   background:rgba(248,245,239,.98);
   border-bottom-color:var(--border);
   box-shadow:0 1px 16px rgba(0,0,0,.04);
-  min-height:100px;
+  min-height:160px;
 }
 .hd-inner{
   display:flex;
@@ -242,15 +242,15 @@ ul,ol{list-style:none}
   justify-content:center;
 }
 .logo-img{
-  height:110px;
+  height:190px;
   width:auto;
   object-fit:contain;
   transition:height .3s,opacity .3s;
   display:block;
 }
-.hd.scrolled .logo-img{height:90px}
+.hd.scrolled .logo-img{height:150px}
 .logo:hover .logo-img{opacity:.85}
-.logo-img-footer{height:90px}
+.logo-img-footer{height:120px}
 
 .nav-d{display:flex;align-items:center;gap:2.25rem}
 .nav-d a{
@@ -335,7 +335,7 @@ ul,ol{list-style:none}
   position:relative;
   overflow:hidden;
   background:var(--bg);
-  padding:9rem 0 4rem;
+  padding:14rem 0 4rem;
 }
 .hero::before{
   content:'';
@@ -1125,7 +1125,11 @@ ul,ol{list-style:none}
 @media(max-width:1024px){
   .nav-d{display:none}
   .ham{display:flex}
-  .hero{padding:8rem 0 3rem}
+  .hd{min-height:160px}
+  .hd.scrolled{min-height:130px}
+  .logo-img{height:140px}
+  .hd.scrolled .logo-img{height:115px}
+  .hero{padding:11rem 0 3rem}
   .hero::before{display:none}
   .hero-container{grid-template-columns:1fr;gap:2.5rem;padding:0 1.5rem}
   .hero-left{max-width:100%}
@@ -1153,12 +1157,12 @@ ul,ol{list-style:none}
 }
 
 @media(max-width:768px){
-  html{scroll-padding-top:110px}
-  .hd{min-height:100px}
-  .hd.scrolled{min-height:85px}
-  .logo-img{height:90px}
-  .hd.scrolled .logo-img{height:75px}
-  .hero{padding:7rem 0 2.5rem}
+  html{scroll-padding-top:140px}
+  .hd{min-height:130px}
+  .hd.scrolled{min-height:105px}
+  .logo-img{height:115px}
+  .hd.scrolled .logo-img{height:90px}
+  .hero{padding:9rem 0 2.5rem}
   .hero-right{display:none}
   .port-grid{grid-template-columns:1fr}
   .p-card:nth-child(n){grid-column:auto}
@@ -1179,19 +1183,19 @@ ul,ol{list-style:none}
 }
 
 @media(max-width:640px){
-  html{scroll-padding-top:95px}
-  .hd{min-height:85px}
-  .hd.scrolled{min-height:75px}
-  .logo-img{height:75px}
-  .hd.scrolled .logo-img{height:65px}
-  .hero{padding:6rem 0 2.25rem}
+  html{scroll-padding-top:115px}
+  .hd{min-height:105px}
+  .hd.scrolled{min-height:90px}
+  .logo-img{height:90px}
+  .hd.scrolled .logo-img{height:78px}
+  .hero{padding:7.5rem 0 2.25rem}
   .hero-creds-strip{grid-template-columns:1fr 1fr}
   .hero-creds-num{font-size:1.375rem}
 }
 
 @media(max-width:480px){
-  .logo-img{height:65px}
-  .hd.scrolled .logo-img{height:55px}
+  .logo-img{height:75px}
+  .hd.scrolled .logo-img{height:65px}
   .hero-ctas{flex-direction:column}
   .hero-ctas .btn,.cta-btns .btn{width:100%;justify-content:center}
   .cta-btns{flex-direction:column;align-items:center}
@@ -1218,7 +1222,7 @@ ul,ol{list-style:none}
 <header class="hd" id="hd" role="banner">
   <div class="container hd-inner">
     <a href="#inicio" class="logo" aria-label="Início">
-      <img fetchpriority="high" decoding="async" src="logo-wander.png" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="logo-img" width="340" height="110">
+      <img fetchpriority="high" decoding="async" src="logo-wander.png" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="logo-img" width="580" height="190">
     </a>
     <nav class="nav-d" aria-label="Menu principal">
       <a href="#inicio">Início</a>
@@ -1593,7 +1597,7 @@ ul,ol{list-style:none}
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="logo">
-          <img fetchpriority="low" decoding="async" loading="lazy" src="logo-wander.png" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="logo-img logo-img-footer" width="280" height="90">
+          <img fetchpriority="low" decoding="async" loading="lazy" src="logo-wander.png" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="logo-img logo-img-footer" width="370" height="120">
         </div>
         <p class="footer-desc">Projetos residenciais e comerciais de alto padrão com visão autoral, repertório internacional e experiência em designer de interiores e arquitetura.</p>
       </div>
