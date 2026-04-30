@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#F8F5EF">
+<meta name="color-scheme" content="light">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="Wander Aguiar">
 <meta name="geo.region" content="BR-PR">
@@ -21,13 +22,21 @@
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080808'/><text x='6' y='24' font-size='20' fill='%23B79A63' font-family='serif'>A</text></svg>">
 
+<!-- DNS prefetch -->
+<link rel="dns-prefetch" href="https://wa.me">
+
+<!-- Preconnect para fontes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Manrope:wght@400;500&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 
+<!-- Fontes otimizadas: somente weights essenciais, font-display swap -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Manrope:wght@400;500&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+
+<!-- Preload de recursos críticos LCP -->
 <link rel="preload" as="image" href="logo-wander.png" fetchpriority="high">
 <link rel="preload" as="image" href="foto-hero.jpg" fetchpriority="high">
 
+<!-- Schema -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Wander Aguiar — Designer de Interiores e Arquitetura","description":"Projetos residenciais e comerciais de alto padrão com designer de interiores e arquitetura.","url":"https://www.seudominio.com.br","telephone":"+5541999872997","address":{"@type":"PostalAddress","addressLocality":"Curitiba","addressRegion":"PR","addressCountry":"BR"},"priceRange":"$$$$","image":"https://www.seudominio.com.br/og-image.jpg","sameAs":["https://www.instagram.com/seuperfil"]}
 </script>
@@ -37,7 +46,7 @@
 
 <style>
 /* ═══════════════════════════════════════════════════════════
-   RESET MÍNIMO + VARIÁVEIS
+   RESET ENXUTO
    ═══════════════════════════════════════════════════════════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
@@ -57,7 +66,6 @@
   --ff-d:'Cormorant Garamond',Georgia,serif;
   --ff-b:'Manrope',sans-serif;
   --ff-l:'Montserrat',sans-serif;
-  --ease:cubic-bezier(.16,1,.3,1);
   --c:1340px;
 }
 
@@ -66,6 +74,7 @@ html{
   text-size-adjust:100%;
   scroll-padding-top:220px;
   background:var(--bg);
+  /* CRÍTICO: scroll-behavior smooth NUNCA + JS smooth scroll - escolher um. Aqui usamos JS condicional */
 }
 
 body{
@@ -78,10 +87,11 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   -webkit-tap-highlight-color:transparent;
+  /* Não usar will-change no body - cria GPU layer gigante */
 }
 
-html.lock{overflow:hidden}
-html.lock body{overflow:hidden;position:fixed;width:100%;top:var(--st,0)}
+html.lock,html.lock body{overflow:hidden}
+html.lock body{position:fixed;width:100%;top:var(--st,0)}
 
 img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
@@ -117,14 +127,14 @@ ul,ol{list-style:none}
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
 
 /* ═══════════════════════════════════════════════════════════
-   TYPOGRAPHY
+   TIPOGRAFIA
    ═══════════════════════════════════════════════════════════ */
 .t-hero{font-family:var(--ff-d);font-size:clamp(2.25rem,4.2vw,3.75rem);font-weight:300;line-height:1.08;letter-spacing:-.02em}
 .t-xl{font-family:var(--ff-d);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;line-height:1.1;letter-spacing:-.02em}
 .t-body{font-size:clamp(.9375rem,1.2vw,1.0625rem);line-height:1.85;color:var(--stone)}
 
 /* ═══════════════════════════════════════════════════════════
-   BUTTONS
+   BOTÕES (apenas transform/opacity/color animáveis)
    ═══════════════════════════════════════════════════════════ */
 .btn{
   display:inline-flex;
@@ -136,14 +146,14 @@ ul,ol{list-style:none}
   font-weight:500;
   letter-spacing:.18em;
   text-transform:uppercase;
-  transition:background-color .25s,color .25s,border-color .25s;
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease;
 }
 .btn-gold{color:#fff;background:var(--gold);border:1px solid var(--gold)}
 .btn-gold:hover{background:transparent;color:var(--gold)}
 .btn-ghost{color:var(--text);background:transparent;border:1px solid var(--border-h)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.btn::after{content:'→';transition:transform .2s}
-.btn:hover::after{transform:translateX(4px)}
+.btn::after{content:'→';transition:transform .2s ease}
+.btn:hover::after{transform:translate3d(4px,0,0)}
 
 /* ═══════════════════════════════════════════════════════════
    PLACEHOLDERS
@@ -157,7 +167,7 @@ ul,ol{list-style:none}
   position:relative;
   overflow:hidden;
 }
-.ph::before{content:'';position:absolute;inset:0;border:1px solid var(--border)}
+.ph::before{content:'';position:absolute;inset:0;border:1px solid var(--border);pointer-events:none}
 .ph-bg1{background:linear-gradient(160deg,#E8E5E0 0%,#D5D0C8 50%,#E8E5E0 100%)}
 .ph-bg2{background:linear-gradient(160deg,#ECEAE6 0%,#DDD9D2 100%)}
 .ph-icon{
@@ -181,7 +191,7 @@ ul,ol{list-style:none}
 }
 
 /* ═══════════════════════════════════════════════════════════
-   LOADER (mantém dimensões originais da logo)
+   LOADER
    ═══════════════════════════════════════════════════════════ */
 .loader{
   position:fixed;
@@ -193,7 +203,7 @@ ul,ol{list-style:none}
   align-items:center;
   justify-content:center;
   gap:1.5rem;
-  transition:opacity .6s,visibility .6s;
+  transition:opacity .4s ease,visibility .4s ease;
 }
 .loader.done{opacity:0;visibility:hidden;pointer-events:none}
 .loader-logo{height:500px;width:auto;max-width:90%;object-fit:contain}
@@ -204,29 +214,36 @@ ul,ol{list-style:none}
   inset:0;
   background:var(--gold);
   animation:bar 1.1s ease-in-out infinite;
+  transform:translate3d(-100%,0,0);
 }
-@keyframes bar{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes bar{
+  0%{transform:translate3d(-100%,0,0)}
+  100%{transform:translate3d(100%,0,0)}
+}
 
 /* ═══════════════════════════════════════════════════════════
-   HEADER (logo BEM GRANDE e centralizada)
+   HEADER (fixed otimizado - sem backdrop-filter)
    ═══════════════════════════════════════════════════════════ */
 .hd{
   position:fixed;
   top:0;left:0;right:0;
   z-index:1000;
   padding:.5rem 0;
-  background:rgba(248,245,239,.96);
+  background:#F8F5EF;
   border-bottom:1px solid transparent;
-  transition:padding .3s,background-color .3s,border-color .3s,box-shadow .3s;
+  /* Apenas transform e opacity animáveis no scroll - mas aqui mudamos só padding e bg = OK */
+  transition:padding .25s ease,box-shadow .25s ease,border-color .25s ease;
   min-height:200px;
   display:flex;
   align-items:center;
+  /* contain isola repaints do header do resto da página */
+  contain:layout style;
 }
 .hd.scrolled{
   padding:.5rem 0;
   background:rgba(248,245,239,.98);
   border-bottom-color:var(--border);
-  box-shadow:0 1px 16px rgba(0,0,0,.04);
+  box-shadow:0 1px 12px rgba(0,0,0,.05);
   min-height:160px;
 }
 .hd-inner{
@@ -245,7 +262,7 @@ ul,ol{list-style:none}
   height:190px;
   width:auto;
   object-fit:contain;
-  transition:height .3s,opacity .3s;
+  transition:height .25s ease,opacity .2s ease;
   display:block;
 }
 .hd.scrolled .logo-img{height:150px}
@@ -260,7 +277,7 @@ ul,ol{list-style:none}
   letter-spacing:.18em;
   text-transform:uppercase;
   color:var(--stone);
-  transition:color .25s;
+  transition:color .2s ease;
   position:relative;
 }
 .nav-d a::after{
@@ -269,7 +286,7 @@ ul,ol{list-style:none}
   bottom:-4px;left:0;
   width:0;height:1px;
   background:var(--gold);
-  transition:width .3s;
+  transition:width .25s ease;
 }
 .nav-d a:hover{color:var(--text)}
 .nav-d a:hover::after{width:100%}
@@ -284,10 +301,10 @@ ul,ol{list-style:none}
 
 /* Hamburger */
 .ham{display:none;flex-direction:column;gap:7px;padding:8px;z-index:1001}
-.ham span{width:26px;height:1.5px;background:var(--text);transition:transform .3s,opacity .3s}
-.ham.on span:nth-child(1){transform:rotate(45deg) translate(5.5px,5.5px)}
+.ham span{width:26px;height:1.5px;background:var(--text);transition:transform .25s ease,opacity .2s ease;transform-origin:center}
+.ham.on span:nth-child(1){transform:translate3d(0,5.5px,0) rotate(45deg)}
 .ham.on span:nth-child(2){opacity:0}
-.ham.on span:nth-child(3){transform:rotate(-45deg) translate(5.5px,-5.5px)}
+.ham.on span:nth-child(3){transform:translate3d(0,-5.5px,0) rotate(-45deg)}
 
 /* Mobile Nav */
 .nav-m{
@@ -301,7 +318,7 @@ ul,ol{list-style:none}
   gap:2rem;
   opacity:0;
   visibility:hidden;
-  transition:opacity .3s,visibility .3s;
+  transition:opacity .25s ease,visibility .25s ease;
   z-index:999;
   padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
@@ -311,7 +328,7 @@ ul,ol{list-style:none}
   font-size:clamp(1.5rem,5vw,2.25rem);
   font-weight:300;
   color:var(--stone);
-  transition:color .25s;
+  transition:color .2s ease;
 }
 .nav-m a:hover{color:var(--gold)}
 .nav-m-cta{
@@ -324,7 +341,7 @@ ul,ol{list-style:none}
   color:var(--gold);
   padding:1rem 2.5rem;
   border:1px solid rgba(184,154,99,.4);
-  transition:background-color .25s,color .25s;
+  transition:background-color .2s ease,color .2s ease;
 }
 .nav-m-cta:hover{background:var(--gold);color:#fff}
 
@@ -344,6 +361,7 @@ ul,ol{list-style:none}
   width:48%;height:100%;
   background:var(--bg-alt);
   z-index:0;
+  /* pseudo-elemento, sem repaint custo */
 }
 .hero-container{
   max-width:1280px;
@@ -386,7 +404,10 @@ ul,ol{list-style:none}
   position:relative;
   border-radius:6px;
   overflow:hidden;
-  box-shadow:0 20px 40px -15px rgba(0,0,0,.18);
+  /* Box-shadow simples, single-pass */
+  box-shadow:0 18px 36px -14px rgba(0,0,0,.18);
+  /* Promove o card a layer próprio para isolar repaints */
+  transform:translateZ(0);
 }
 .hero-photo-inner{position:relative;overflow:hidden}
 .hero-photo{
@@ -409,7 +430,7 @@ ul,ol{list-style:none}
   align-items:center;
   justify-content:center;
   z-index:3;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 .hero-badge-num strong{
   font-family:var(--ff-d);
@@ -436,7 +457,7 @@ ul,ol{list-style:none}
   background:#fff;
   border-top:2px solid var(--gold-rich);
   z-index:2;
-  box-shadow:0 2px 12px rgba(0,0,0,.05);
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 .hero-photo-caption .name{
   font-family:var(--ff-d);
@@ -531,12 +552,12 @@ ul,ol{list-style:none}
   text-transform:uppercase;
   color:var(--stone);
   border:1px solid transparent;
-  transition:color .25s,border-color .25s;
+  transition:color .2s ease,border-color .2s ease;
 }
 .fbtn:hover,.fbtn.on{color:var(--gold);border-color:var(--border-h)}
 
 .port-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.25rem}
-.p-card{position:relative;cursor:pointer;overflow:hidden}
+.p-card{position:relative;cursor:pointer;overflow:hidden;contain:layout paint}
 .p-card:nth-child(1){grid-column:1/8}
 .p-card:nth-child(2){grid-column:8/13}
 .p-card:nth-child(3){grid-column:1/5}
@@ -547,8 +568,8 @@ ul,ol{list-style:none}
 .p-card-img{aspect-ratio:4/5;overflow:hidden}
 .p-card:nth-child(1) .p-card-img,
 .p-card:nth-child(6) .p-card-img{aspect-ratio:16/10}
-.p-card-img .ph{width:100%;height:100%;transition:transform .5s}
-.p-card:hover .p-card-img .ph{transform:scale(1.04)}
+.p-card-img .ph{width:100%;height:100%;transition:transform .4s ease;transform:translateZ(0)}
+.p-card:hover .p-card-img .ph{transform:translate3d(0,0,0) scale(1.04)}
 
 .p-card-over{
   position:absolute;
@@ -559,7 +580,8 @@ ul,ol{list-style:none}
   justify-content:flex-end;
   padding:clamp(1.25rem,2vw,2rem);
   opacity:0;
-  transition:opacity .3s;
+  transition:opacity .25s ease;
+  pointer-events:none;
 }
 .p-card:hover .p-card-over{opacity:1}
 
@@ -591,9 +613,7 @@ ul,ol{list-style:none}
   text-transform:uppercase;
   color:var(--gold);
   margin-top:.75rem;
-  transition:gap .25s;
 }
-.p-card-link:hover{gap:.875rem}
 
 /* ═══════════════════════════════════════════════════════════
    BEFORE/AFTER
@@ -606,7 +626,8 @@ ul,ol{list-style:none}
 .ba-card{
   border:1px solid var(--border);
   overflow:hidden;
-  transition:border-color .25s;
+  transition:border-color .2s ease;
+  contain:layout paint;
 }
 .ba-card:hover{border-color:var(--border-h)}
 .ba-imgs{display:grid;grid-template-columns:1fr 1fr;position:relative}
@@ -626,7 +647,7 @@ ul,ol{list-style:none}
 .ba-arrow{
   position:absolute;
   top:50%;left:50%;
-  transform:translate(-50%,-50%);
+  transform:translate3d(-50%,-50%,0);
   width:36px;height:36px;
   border:1px solid var(--gold);
   border-radius:50%;
@@ -725,7 +746,7 @@ ul,ol{list-style:none}
 .tl-item{
   padding:2rem;
   border:1px solid var(--border);
-  transition:border-color .25s;
+  transition:border-color .2s ease;
 }
 .tl-item:hover{border-color:var(--border-h)}
 .tl-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;margin-bottom:1.25rem}
@@ -764,7 +785,7 @@ ul,ol{list-style:none}
 .proc-step{
   background:var(--surface);
   padding:clamp(1.75rem,2.5vw,2.5rem);
-  transition:background-color .25s;
+  transition:background-color .2s ease;
 }
 .proc-step:hover{background:#fff}
 .proc-n{
@@ -830,14 +851,14 @@ ul,ol{list-style:none}
   margin-bottom:.25rem;
 }
 .form-contact-val{color:var(--text-soft);font-size:1rem}
-.form-contact-val a{transition:color .25s}
+.form-contact-val a{transition:color .2s ease}
 .form-contact-val a:hover{color:var(--gold)}
 
 .form-wrap{
   border:1px solid var(--border);
   padding:clamp(2rem,3vw,3rem);
   background:#fff;
-  box-shadow:0 4px 30px rgba(0,0,0,.04);
+  box-shadow:0 2px 16px rgba(0,0,0,.04);
 }
 .form-title{
   font-family:var(--ff-d);
@@ -874,7 +895,7 @@ ul,ol{list-style:none}
   background:#fff;
   border:1px solid var(--border);
   outline:none;
-  transition:border-color .25s;
+  transition:border-color .2s ease;
 }
 .fi:focus,.fs:focus,.ft:focus{border-color:var(--gold)}
 .fs{
@@ -897,7 +918,7 @@ ul,ol{list-style:none}
   background:var(--gold);
   border:1px solid var(--gold);
   cursor:pointer;
-  transition:background-color .25s,color .25s;
+  transition:background-color .2s ease,color .2s ease;
   margin-top:.5rem;
 }
 .f-submit:hover{background:transparent;color:var(--gold)}
@@ -932,13 +953,13 @@ ul,ol{list-style:none}
   font-weight:400;
   color:var(--text-soft);
   cursor:pointer;
-  transition:color .25s;
+  transition:color .2s ease;
 }
 .faq-q:hover{color:var(--gold)}
 .faq-tog{
   font-size:1.125rem;
   color:var(--gold);
-  transition:transform .25s;
+  transition:transform .25s ease;
   flex-shrink:0;
   margin-left:1rem;
 }
@@ -975,7 +996,7 @@ ul,ol{list-style:none}
   font-size:.8125rem;
   color:var(--stone);
   padding:.3rem 0;
-  transition:color .25s;
+  transition:color .2s ease;
 }
 .footer-col a:hover{color:var(--gold)}
 .footer-bottom{
@@ -1004,12 +1025,12 @@ ul,ol{list-style:none}
   justify-content:space-between;
   gap:1.5rem;
   z-index:950;
-  transform:translateY(100%);
-  transition:transform .3s;
+  transform:translate3d(0,100%,0);
+  transition:transform .3s ease;
   flex-wrap:wrap;
-  box-shadow:0 -4px 20px rgba(0,0,0,.06);
+  box-shadow:0 -2px 12px rgba(0,0,0,.06);
 }
-.cookie-banner.show{transform:translateY(0)}
+.cookie-banner.show{transform:translate3d(0,0,0)}
 .cookie-banner p{font-size:.75rem;color:var(--stone);line-height:1.6;flex:1;min-width:250px}
 .cookie-banner a{color:var(--gold)}
 .cookie-btns{display:flex;gap:.5rem;flex-shrink:0}
@@ -1021,7 +1042,7 @@ ul,ol{list-style:none}
   letter-spacing:.15em;
   text-transform:uppercase;
   cursor:pointer;
-  transition:background-color .25s,color .25s,border-color .25s;
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease;
 }
 .cookie-accept{color:#fff;background:var(--gold);border:1px solid var(--gold)}
 .cookie-accept:hover{background:transparent;color:var(--gold)}
@@ -1042,8 +1063,8 @@ ul,ol{list-style:none}
   align-items:center;
   justify-content:center;
   z-index:900;
-  box-shadow:0 4px 24px rgba(37,211,102,.25);
-  transition:transform .25s;
+  box-shadow:0 4px 16px rgba(37,211,102,.3);
+  transition:transform .2s ease;
 }
 .wa:hover{transform:scale(1.08)}
 .wa svg{width:26px;height:26px;fill:#fff}
@@ -1058,7 +1079,7 @@ ul,ol{list-style:none}
   z-index:2000;
   opacity:0;
   visibility:hidden;
-  transition:opacity .25s,visibility .25s;
+  transition:opacity .25s ease,visibility .25s ease;
   overflow-y:auto;
 }
 .modal-o.open{opacity:1;visibility:visible}
@@ -1084,7 +1105,7 @@ ul,ol{list-style:none}
   z-index:1;
   border:1px solid var(--border);
   background:#fff;
-  transition:color .25s,border-color .25s;
+  transition:color .2s ease,border-color .2s ease;
 }
 .modal-x:hover{color:var(--text);border-color:var(--border-h)}
 .modal-hero{aspect-ratio:16/9;margin-bottom:2.5rem}
@@ -1118,6 +1139,12 @@ ul,ol{list-style:none}
 .modal-det p{font-size:.9375rem;color:var(--stone);line-height:1.7}
 .modal-cta{display:flex;justify-content:center}
 .modal-cta .btn{width:100%;justify-content:center}
+
+/* ═══════════════════════════════════════════════════════════
+   REVEAL ANIMATION (transform/opacity only - GPU)
+   ═══════════════════════════════════════════════════════════ */
+.rv{opacity:0;transform:translate3d(0,16px,0);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:translate3d(0,0,0)}
 
 /* ═══════════════════════════════════════════════════════════
    RESPONSIVE
@@ -1167,6 +1194,7 @@ ul,ol{list-style:none}
   .port-grid{grid-template-columns:1fr}
   .p-card:nth-child(n){grid-column:auto}
   .p-card-img,.p-card:nth-child(1) .p-card-img,.p-card:nth-child(6) .p-card-img{aspect-ratio:16/10}
+  /* Mobile: overlay sempre visível, sem hover state */
   .p-card-over{opacity:1}
   .p-card-info{display:none}
   .ba-wrap{grid-template-columns:1fr}
@@ -1180,6 +1208,8 @@ ul,ol{list-style:none}
   .filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:.5rem;-webkit-overflow-scrolling:touch}
   .fbtn{white-space:nowrap}
   .wa{bottom:calc(1.25rem + env(safe-area-inset-bottom));right:1.25rem;width:48px;height:48px}
+  /* Mobile: simplifica reveal para evitar trabalho extra */
+  .rv{transform:translate3d(0,8px,0)}
 }
 
 @media(max-width:640px){
@@ -1203,12 +1233,16 @@ ul,ol{list-style:none}
   .about-hl+.about-hl{border-left:none;border-top:1px solid var(--border)}
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ACESSIBILIDADE: usuário pediu menos movimento → desliga tudo
+   ═══════════════════════════════════════════════════════════ */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation-duration:.01ms!important;
     transition-duration:.01ms!important;
     scroll-behavior:auto!important;
   }
+  .rv{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -1269,7 +1303,7 @@ ul,ol{list-style:none}
     <div class="hero-right">
       <div class="hero-img-wrap">
         <div class="hero-photo-inner">
-          <img src="foto-hero.jpg" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="hero-photo" loading="eager" fetchpriority="high" width="480" height="600">
+          <img src="foto-hero.jpg" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="hero-photo" loading="eager" fetchpriority="high" decoding="async" width="480" height="600">
           <div class="hero-badge-num"><strong>+20</strong><span>Anos</span></div>
           <div class="hero-photo-caption">
             <div class="name">Wander Aguiar</div>
@@ -1292,9 +1326,9 @@ ul,ol{list-style:none}
 
 <section class="manifesto sec">
   <div class="container manifesto-inner">
-    <h2>Luxo não é excesso.<br>É intenção.</h2>
-    <p class="t-body">Um espaço sofisticado, não nasce da quantidade de elementos, mas da precisão das escolhas. Proporção, luz, textura, e identidade, constroem ambientes que permanecem.</p>
-    <p class="t-body" style="margin-top:1rem">Cada projeto é uma leitura. E cada leitura, uma assinatura.</p>
+    <h2 class="rv">Luxo não é excesso.<br>É intenção.</h2>
+    <p class="t-body rv">Um espaço sofisticado, não nasce da quantidade de elementos, mas da precisão das escolhas. Proporção, luz, textura, e identidade, constroem ambientes que permanecem.</p>
+    <p class="t-body rv" style="margin-top:1rem">Cada projeto é uma leitura. E cada leitura, uma assinatura.</p>
   </div>
 </section>
 
@@ -1302,10 +1336,10 @@ ul,ol{list-style:none}
   <div class="container">
     <div class="port-header">
       <div class="port-header-l">
-        <span class="label">Portfólio</span>
-        <h2 class="t-xl-port" style="margin-top:1rem">Projetos em destaque</h2>
+        <span class="label rv">Portfólio</span>
+        <h2 class="t-xl-port rv" style="margin-top:1rem">Projetos em destaque</h2>
       </div>
-      <div class="filters">
+      <div class="filters rv">
         <button class="fbtn on" data-filter="all">Todos</button>
         <button class="fbtn" data-filter="residencial">Residencial</button>
         <button class="fbtn" data-filter="comercial">Comercial</button>
@@ -1313,7 +1347,7 @@ ul,ol{list-style:none}
       </div>
     </div>
     <div class="port-grid" id="portGrid">
-      <div class="p-card" data-cat="residencial" data-p="1">
+      <div class="p-card rv" data-cat="residencial" data-p="1">
         <div class="p-card-img"><div class="ph ph-bg1"><div class="ph-icon">◇</div><p class="ph-text">Inserir foto Residência Alto Padrão</p></div></div>
         <div class="p-card-over">
           <p class="p-card-cat">Residencial</p>
@@ -1325,7 +1359,7 @@ ul,ol{list-style:none}
           <h3 class="p-card-name">Residência Alto Padrão</h3>
         </div>
       </div>
-      <div class="p-card" data-cat="interiores autoral" data-p="2">
+      <div class="p-card rv" data-cat="interiores autoral" data-p="2">
         <div class="p-card-img"><div class="ph ph-bg2"><div class="ph-icon">◇</div><p class="ph-text">Inserir foto Projeto de Interiores</p></div></div>
         <div class="p-card-over">
           <p class="p-card-cat">Interiores</p>
@@ -1337,7 +1371,7 @@ ul,ol{list-style:none}
           <h3 class="p-card-name">Projeto de Interiores</h3>
         </div>
       </div>
-      <div class="p-card" data-cat="compactos autoral" data-p="3">
+      <div class="p-card rv" data-cat="compactos autoral" data-p="3">
         <div class="p-card-img"><div class="ph ph-bg1"><div class="ph-icon">◇</div><p class="ph-text">Inserir foto Compacto de Luxo</p></div></div>
         <div class="p-card-over">
           <p class="p-card-cat">Compactos de Luxo</p>
@@ -1349,7 +1383,7 @@ ul,ol{list-style:none}
           <h3 class="p-card-name">Apartamento Compacto de Luxo</h3>
         </div>
       </div>
-      <div class="p-card" data-cat="autoral interiores" data-p="4">
+      <div class="p-card rv" data-cat="autoral interiores" data-p="4">
         <div class="p-card-img"><div class="ph ph-bg2"><div class="ph-icon">◇</div><p class="ph-text">Inserir foto Casa Cor</p></div></div>
         <div class="p-card-over">
           <p class="p-card-cat">Casa Cor</p>
@@ -1363,7 +1397,7 @@ ul,ol{list-style:none}
           <span class="p-card-meta">Curitiba</span>
         </div>
       </div>
-      <div class="p-card" data-cat="comercial" data-p="5">
+      <div class="p-card rv" data-cat="comercial" data-p="5">
         <div class="p-card-img"><div class="ph ph-bg1"><div class="ph-icon">◇</div><p class="ph-text">Inserir foto Comercial</p></div></div>
         <div class="p-card-over">
           <p class="p-card-cat">Comercial</p>
@@ -1375,7 +1409,7 @@ ul,ol{list-style:none}
           <h3 class="p-card-name">Projeto Comercial</h3>
         </div>
       </div>
-      <div class="p-card" data-cat="residencial" data-p="6">
+      <div class="p-card rv" data-cat="residencial" data-p="6">
         <div class="p-card-img"><div class="ph ph-bg2"><div class="ph-icon">◇</div><p class="ph-text">Inserir foto Reforma</p></div></div>
         <div class="p-card-over">
           <p class="p-card-cat">Reforma & Gerenciamento</p>
@@ -1394,12 +1428,12 @@ ul,ol{list-style:none}
 <section class="ba sec">
   <div class="container">
     <div class="ba-head">
-      <span class="label">Transformações</span>
-      <h2 class="t-xl" style="margin:1rem 0 1.5rem">Do potencial invisível<br>ao espaço autoral.</h2>
-      <p class="t-body">Antes da transformação, existe uma leitura. Cada ambiente carrega possibilidades, que precisam ser reveladas com técnica, sensibilidade, e direção estética.</p>
+      <span class="label rv">Transformações</span>
+      <h2 class="t-xl rv" style="margin:1rem 0 1.5rem">Do potencial invisível<br>ao espaço autoral.</h2>
+      <p class="t-body rv">Antes da transformação, existe uma leitura. Cada ambiente carrega possibilidades, que precisam ser reveladas com técnica, sensibilidade, e direção estética.</p>
     </div>
     <div class="ba-wrap">
-      <div class="ba-card">
+      <div class="ba-card rv">
         <div class="ba-imgs">
           <div class="ba-side ph ph-bg2"><span class="ba-label">Antes</span><div class="ph-icon">◇</div><p class="ph-text">Inserir foto antes</p></div>
           <div class="ba-side ph ph-bg1"><span class="ba-label">Depois</span><div class="ph-icon">◇</div><p class="ph-text">Inserir foto depois</p></div>
@@ -1407,7 +1441,7 @@ ul,ol{list-style:none}
         </div>
         <div class="ba-foot"><h3>Transformação Residencial</h3></div>
       </div>
-      <div class="ba-card">
+      <div class="ba-card rv">
         <div class="ba-imgs">
           <div class="ba-side ph ph-bg2"><span class="ba-label">Antes</span><div class="ph-icon">◇</div><p class="ph-text">Inserir foto antes</p></div>
           <div class="ba-side ph ph-bg1"><span class="ba-label">Depois</span><div class="ph-icon">◇</div><p class="ph-text">Inserir foto depois</p></div>
@@ -1423,19 +1457,19 @@ ul,ol{list-style:none}
 
 <section class="sec" id="sobre">
   <div class="container about-grid">
-    <div class="about-img">
-      <img src="foto-arquiteto.jpg" alt="Wander Aguiar — Arquiteto e Designer de Interiores" loading="lazy" class="about-photo" width="600" height="800">
+    <div class="about-img rv">
+      <img src="foto-arquiteto.jpg" alt="Wander Aguiar — Arquiteto e Designer de Interiores" loading="lazy" decoding="async" class="about-photo" width="600" height="800">
     </div>
     <div class="about-txt">
-      <span class="label">Sobre</span>
-      <h2 class="t-xl" style="margin-top:1.5rem">Wander Aguiar</h2>
-      <p class="about-role">Designer de Interiores e Arquitetura</p>
-      <p class="t-body">Nascido em Curitiba, em 1º de agosto de 1969, em uma família com raízes espanholas, e portuguesas, cuja trajetória empreendedora no interior do Paraná, contribuiu para a formação de uma base sólida, marcada por visão, estrutura, e construção de legado.</p>
-      <p class="t-body">Formado em Psicologia aos 24 anos, desenvolveu uma percepção apurada sobre comportamento, estética, e vivência dos espaços — elementos que, ao longo do tempo, foram fundamentais para uma nova direção para uma sua nova carreira de trabalho. Como designer de interiores e arquitetura.</p>
-      <p class="t-body">Com mais de 20 anos de experiência, consolidou sua carreira na criação de projetos residenciais, e comerciais, de alto padrão, com foco na valorização do imóvel, identidade, estética, e qualidade de execução.</p>
-      <p class="t-body">Sua trajetória inclui; participações em mostras como a Casa Cor, além de reconhecimento internacional, com destaque no Salone del Mobile.Milano.</p>
-      <p class="t-body">Ao longo dos anos, também desenvolveu peças de mobiliário autorais, ampliando a exclusividade, e autenticidade do seus projetos.</p>
-      <div class="about-highlights">
+      <span class="label rv">Sobre</span>
+      <h2 class="t-xl rv" style="margin-top:1.5rem">Wander Aguiar</h2>
+      <p class="about-role rv">Designer de Interiores e Arquitetura</p>
+      <p class="t-body rv">Nascido em Curitiba, em 1º de agosto de 1969, em uma família com raízes espanholas, e portuguesas, cuja trajetória empreendedora no interior do Paraná, contribuiu para a formação de uma base sólida, marcada por visão, estrutura, e construção de legado.</p>
+      <p class="t-body rv">Formado em Psicologia aos 24 anos, desenvolveu uma percepção apurada sobre comportamento, estética, e vivência dos espaços — elementos que, ao longo do tempo, foram fundamentais para uma nova direção para uma sua nova carreira de trabalho. Como designer de interiores e arquitetura.</p>
+      <p class="t-body rv">Com mais de 20 anos de experiência, consolidou sua carreira na criação de projetos residenciais, e comerciais, de alto padrão, com foco na valorização do imóvel, identidade, estética, e qualidade de execução.</p>
+      <p class="t-body rv">Sua trajetória inclui; participações em mostras como a Casa Cor, além de reconhecimento internacional, com destaque no Salone del Mobile.Milano.</p>
+      <p class="t-body rv">Ao longo dos anos, também desenvolveu peças de mobiliário autorais, ampliando a exclusividade, e autenticidade do seus projetos.</p>
+      <div class="about-highlights rv">
         <div class="about-hl">
           <span class="about-hl-val">+20</span>
           <span class="about-hl-label">Designer de interiores e arquitetura</span>
@@ -1457,10 +1491,10 @@ ul,ol{list-style:none}
   <div class="container">
     <div class="signature-inner">
       <div class="signature-line" aria-hidden="true"></div>
-      <span class="label">Assinatura</span>
-      <p class="signature-text" style="margin-top:1.5rem">Seu trabalho, é marcado por uma linguagem contemporânea, onde o <em>luxo</em>, é tratado com equilíbrio, <em>leveza</em>, e intenção.</p>
-      <p class="signature-text">Linhas limpas, materiais refinados, texturas bem definidas, e uma curadoria cuidadosa, criam espaços sofisticados, porém sempre funcionais, e conectados ao estilo de vida de cada cliente.</p>
-      <p class="t-body">Cada projeto nasce de uma leitura estratégica — unindo estética, proporção, e execução — resultando em ambientes que não apenas impressionam, mas permanecem.</p>
+      <span class="label rv">Assinatura</span>
+      <p class="signature-text rv" style="margin-top:1.5rem">Seu trabalho, é marcado por uma linguagem contemporânea, onde o <em>luxo</em>, é tratado com equilíbrio, <em>leveza</em>, e intenção.</p>
+      <p class="signature-text rv">Linhas limpas, materiais refinados, texturas bem definidas, e uma curadoria cuidadosa, criam espaços sofisticados, porém sempre funcionais, e conectados ao estilo de vida de cada cliente.</p>
+      <p class="t-body rv">Cada projeto nasce de uma leitura estratégica — unindo estética, proporção, e execução — resultando em ambientes que não apenas impressionam, mas permanecem.</p>
       <div class="signature-line" aria-hidden="true"></div>
     </div>
   </div>
@@ -1469,16 +1503,16 @@ ul,ol{list-style:none}
 <section class="tl sec" id="trajetoria">
   <div class="container">
     <div class="tl-head">
-      <span class="label">Trajetória</span>
-      <h2 class="t-xl" style="margin-top:1rem;color:#1A1A1A">Uma trajetória marcada por repertório, e reconhecimento.</h2>
+      <span class="label rv">Trajetória</span>
+      <h2 class="t-xl rv" style="margin-top:1rem;color:#1A1A1A">Uma trajetória marcada por repertório, e reconhecimento.</h2>
     </div>
     <div class="tl-track">
-      <div class="tl-item"><div class="tl-dot"></div><p class="tl-year">Formação</p><h3 class="tl-title">Designer de Interiores</h3><p class="tl-desc">Base criativa, e técnica em composição, materiais e linguagem espacial.</p></div>
-      <div class="tl-item"><div class="tl-dot"></div><p class="tl-year">Casa Cor</p><h3 class="tl-title">Curitiba</h3><p class="tl-desc">Ambiente autoral na principal mostra de designer de interiores do Paraná.</p></div>
-      <div class="tl-item"><div class="tl-dot"></div><p class="tl-year">Casa Cor</p><h3 class="tl-title">São Paulo</h3><p class="tl-desc">Presença na maior edição do país, entre profissionais de referência nacional.</p></div>
-      <div class="tl-item"><div class="tl-dot"></div><p class="tl-year">Casa Cor</p><h3 class="tl-title">Santa Catarina</h3><p class="tl-desc">Reconhecimento espandido a novos mercados, e com textos regionais.</p></div>
-      <div class="tl-item"><div class="tl-dot"></div><p class="tl-year">2009</p><h3 class="tl-title">Salone del Mobile.Milano</h3><p class="tl-desc">Reconhecimento em categoria luxo — Tema: Lusso e colore — Giallo.</p></div>
-      <div class="tl-item"><div class="tl-dot"></div><p class="tl-year">+20 anos</p><h3 class="tl-title">Trajetória consolidada</h3><p class="tl-desc">Centenas de projetos residenciais, comerciais, todos entregues rigorosamente em seus prazos.</p></div>
+      <div class="tl-item rv"><div class="tl-dot"></div><p class="tl-year">Formação</p><h3 class="tl-title">Designer de Interiores</h3><p class="tl-desc">Base criativa, e técnica em composição, materiais e linguagem espacial.</p></div>
+      <div class="tl-item rv"><div class="tl-dot"></div><p class="tl-year">Casa Cor</p><h3 class="tl-title">Curitiba</h3><p class="tl-desc">Ambiente autoral na principal mostra de designer de interiores do Paraná.</p></div>
+      <div class="tl-item rv"><div class="tl-dot"></div><p class="tl-year">Casa Cor</p><h3 class="tl-title">São Paulo</h3><p class="tl-desc">Presença na maior edição do país, entre profissionais de referência nacional.</p></div>
+      <div class="tl-item rv"><div class="tl-dot"></div><p class="tl-year">Casa Cor</p><h3 class="tl-title">Santa Catarina</h3><p class="tl-desc">Reconhecimento espandido a novos mercados, e com textos regionais.</p></div>
+      <div class="tl-item rv"><div class="tl-dot"></div><p class="tl-year">2009</p><h3 class="tl-title">Salone del Mobile.Milano</h3><p class="tl-desc">Reconhecimento em categoria luxo — Tema: Lusso e colore — Giallo.</p></div>
+      <div class="tl-item rv"><div class="tl-dot"></div><p class="tl-year">+20 anos</p><h3 class="tl-title">Trajetória consolidada</h3><p class="tl-desc">Centenas de projetos residenciais, comerciais, todos entregues rigorosamente em seus prazos.</p></div>
     </div>
   </div>
 </section>
@@ -1486,18 +1520,18 @@ ul,ol{list-style:none}
 <section class="proc sec" id="processo">
   <div class="container">
     <div class="proc-head">
-      <span class="label">Método</span>
-      <h2 class="t-xl" style="margin-top:1rem">Um processo desenhado para transformar intenção em espaço.</h2>
+      <span class="label rv">Método</span>
+      <h2 class="t-xl rv" style="margin-top:1rem">Um processo desenhado para transformar intenção em espaço.</h2>
     </div>
     <div class="proc-grid">
-      <div class="proc-step"><p class="proc-n">01</p><h3>Escuta e imersão</h3><p>Conversa aprofundada, com cada cliente, para captar, rotina, desejos, emoções, para início da execução de cada projeto.</p></div>
-      <div class="proc-step"><p class="proc-n">02</p><h3>Leitura do espaço</h3><p>Análise técnica, e sensorial do ambiente — limitações, luz, proporções, e potenciais de intervenção.</p></div>
-      <div class="proc-step"><p class="proc-n">03</p><h3>Conceito autoral</h3><p>Definição da identidade do projeto, linguagem, atmosfera, paleta de cores, e materiais, com direção e estética.</p></div>
-      <div class="proc-step"><p class="proc-n">04</p><h3>Direção estética</h3><p>Composição visual que integra texturas, cores, iluminação, e volumetria, em um discurso coerente.</p></div>
-      <div class="proc-step"><p class="proc-n">05</p><h3>Desenvolvimento técnico</h3><p>Plantas, detalhamentos, renders, e especificações com rigor profissional, e atenção ao milímetro.</p></div>
-      <div class="proc-step"><p class="proc-n">06</p><h3>Curadoria de materiais</h3><p>Seleção criteriosa de revestimentos, marcenaria, iluminação, e acabamentos de alta qualidade.</p></div>
-      <div class="proc-step"><p class="proc-n">07</p><h3>Execução ou acompanhamento</h3><p>Gerenciamento, e supervisão quando aplicável, garantindo fidelidade absoluta ao conceito.</p></div>
-      <div class="proc-step"><p class="proc-n">08</p><h3>Entrega e refinamento</h3><p>Documentação completa, memorial descritivo, e ajustes finais para o resultado permanecer.</p></div>
+      <div class="proc-step rv"><p class="proc-n">01</p><h3>Escuta e imersão</h3><p>Conversa aprofundada, com cada cliente, para captar, rotina, desejos, emoções, para início da execução de cada projeto.</p></div>
+      <div class="proc-step rv"><p class="proc-n">02</p><h3>Leitura do espaço</h3><p>Análise técnica, e sensorial do ambiente — limitações, luz, proporções, e potenciais de intervenção.</p></div>
+      <div class="proc-step rv"><p class="proc-n">03</p><h3>Conceito autoral</h3><p>Definição da identidade do projeto, linguagem, atmosfera, paleta de cores, e materiais, com direção e estética.</p></div>
+      <div class="proc-step rv"><p class="proc-n">04</p><h3>Direção estética</h3><p>Composição visual que integra texturas, cores, iluminação, e volumetria, em um discurso coerente.</p></div>
+      <div class="proc-step rv"><p class="proc-n">05</p><h3>Desenvolvimento técnico</h3><p>Plantas, detalhamentos, renders, e especificações com rigor profissional, e atenção ao milímetro.</p></div>
+      <div class="proc-step rv"><p class="proc-n">06</p><h3>Curadoria de materiais</h3><p>Seleção criteriosa de revestimentos, marcenaria, iluminação, e acabamentos de alta qualidade.</p></div>
+      <div class="proc-step rv"><p class="proc-n">07</p><h3>Execução ou acompanhamento</h3><p>Gerenciamento, e supervisão quando aplicável, garantindo fidelidade absoluta ao conceito.</p></div>
+      <div class="proc-step rv"><p class="proc-n">08</p><h3>Entrega e refinamento</h3><p>Documentação completa, memorial descritivo, e ajustes finais para o resultado permanecer.</p></div>
     </div>
   </div>
 </section>
@@ -1505,14 +1539,14 @@ ul,ol{list-style:none}
 <section class="cta-sec">
   <div class="container">
     <div class="cta-inner">
-      <span class="label">Próximo passo</span>
-      <h2 class="t-xl" style="margin-top:1.5rem">Se o seu espaço exige mais do que uma solução comum, ele merece uma leitura autoral.</h2>
-      <p class="t-body">Apresente o contexto do seu projeto, e receba um primeiro direcionamento sobre possibilidades, estilo, e escopo.</p>
-      <div class="cta-btns">
+      <span class="label rv">Próximo passo</span>
+      <h2 class="t-xl rv" style="margin-top:1.5rem">Se o seu espaço exige mais do que uma solução comum, ele merece uma leitura autoral.</h2>
+      <p class="t-body rv">Apresente o contexto do seu projeto, e receba um primeiro direcionamento sobre possibilidades, estilo, e escopo.</p>
+      <div class="cta-btns rv">
         <a href="https://wa.me/5541999872997?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." class="btn btn-gold" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
         <a href="tel:+5541999872997" class="btn btn-ghost">Ligar agora</a>
       </div>
-      <p class="hero-micro">Atendimento mediante disponibilidade e alinhamento com o perfil do projeto.</p>
+      <p class="hero-micro rv">Atendimento mediante disponibilidade e alinhamento com o perfil do projeto.</p>
     </div>
   </div>
 </section>
@@ -1522,10 +1556,10 @@ ul,ol{list-style:none}
 <section class="sec" id="contato">
   <div class="container form-grid">
     <div class="form-info">
-      <span class="label">Contato</span>
-      <h2 class="t-xl" style="margin-top:1.5rem">Apresente seu projeto.</h2>
-      <p class="t-body">Preencha o briefing inicial com as informações do seu projeto. Quanto mais contexto, melhor será a análise inicial.</p>
-      <div class="form-contact">
+      <span class="label rv">Contato</span>
+      <h2 class="t-xl rv" style="margin-top:1.5rem">Apresente seu projeto.</h2>
+      <p class="t-body rv">Preencha o briefing inicial com as informações do seu projeto. Quanto mais contexto, melhor será a análise inicial.</p>
+      <div class="form-contact rv">
         <div class="form-contact-item">
           <p class="form-contact-label">WhatsApp</p>
           <p class="form-contact-val"><a href="https://wa.me/5541999872997" target="_blank" rel="noopener">(41) 99987-2997</a></p>
@@ -1540,15 +1574,15 @@ ul,ol{list-style:none}
         </div>
       </div>
     </div>
-    <div class="form-wrap">
+    <div class="form-wrap rv">
       <p class="form-title">Briefing do Projeto, Área do Cliente</p>
       <p class="form-subtitle">Quanto mais informações você enviar, melhor será a análise inicial.</p>
       <form id="cForm" novalidate>
         <div class="f-row">
-          <div class="fg"><label class="fl" for="fn">Nome completo</label><input type="text" id="fn" class="fi" placeholder="Seu nome" required></div>
-          <div class="fg"><label class="fl" for="fw">WhatsApp</label><input type="tel" id="fw" class="fi" placeholder="(00) 00000-0000" required></div>
+          <div class="fg"><label class="fl" for="fn">Nome completo</label><input type="text" id="fn" class="fi" placeholder="Seu nome" required autocomplete="name"></div>
+          <div class="fg"><label class="fl" for="fw">WhatsApp</label><input type="tel" id="fw" class="fi" placeholder="(00) 00000-0000" required autocomplete="tel"></div>
         </div>
-        <div class="fg"><label class="fl" for="fc">Cidade</label><input type="text" id="fc" class="fi" placeholder="Cidade / Estado"></div>
+        <div class="fg"><label class="fl" for="fc">Cidade</label><input type="text" id="fc" class="fi" placeholder="Cidade / Estado" autocomplete="address-level2"></div>
         <div class="f-row">
           <div class="fg"><label class="fl" for="ft2">Tipo de projeto</label>
             <select id="ft2" class="fs"><option value="">Selecione</option><option>Residencial</option><option>Comercial</option><option>Reforma</option><option>Outro</option></select>
@@ -1576,8 +1610,8 @@ ul,ol{list-style:none}
 <section class="faq sec" id="faq">
   <div class="container">
     <div class="faq-head">
-      <span class="label">Perguntas frequentes</span>
-      <h2 class="t-xl" style="margin-top:1rem">Dúvidas frequentes</h2>
+      <span class="label rv">Perguntas frequentes</span>
+      <h2 class="t-xl rv" style="margin-top:1rem">Dúvidas frequentes</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item"><button class="faq-q" aria-expanded="false">Vocês fazem apenas projetos 3D ( projeto ilustrativo externo, ou interno ), ou os técnicos também ?<span class="faq-tog">+</span></button><div class="faq-a"><p class="faq-a-inner">Sim, podemos apenas fazer o projeto em 3D, ilustrando como ficaria sua residência ou comércio, ou apenas projeto de interiores, ou completo com todos os técnicos como; elétrico, lumínico, gás, ar-condicionado, e outros complementares se necessário.</p></div></div>
@@ -1597,7 +1631,7 @@ ul,ol{list-style:none}
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="logo">
-          <img fetchpriority="low" decoding="async" loading="lazy" src="logo-wander.png" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="logo-img logo-img-footer" width="370" height="120">
+          <img loading="lazy" decoding="async" src="logo-wander.png" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="logo-img logo-img-footer" width="370" height="120">
         </div>
         <p class="footer-desc">Projetos residenciais e comerciais de alto padrão com visão autoral, repertório internacional e experiência em designer de interiores e arquitetura.</p>
       </div>
@@ -1646,83 +1680,125 @@ ul,ol{list-style:none}
 </div>
 
 <script>
+/* ═══════════════════════════════════════════════════════════
+   JS PERFORMÁTICO — sem polling, sem layout thrash, sem long tasks
+   - Listeners passivos
+   - Scroll com requestAnimationFrame
+   - IntersectionObserver para reveal (não scroll)
+   - querySelector cacheado
+   - Smooth scroll nativo via JS controlado (não duplica com CSS)
+   ═══════════════════════════════════════════════════════════ */
 (function(){
 'use strict';
 
-// Loader - some quando tudo carregou
-window.addEventListener('load',function(){
-  setTimeout(function(){
-    var l=document.getElementById('loader');
-    if(l)l.classList.add('done');
-  },400);
-},{once:true});
+var doc=document;
+var docEl=doc.documentElement;
+var body=doc.body;
+var win=window;
 
-// Header scroll - throttled com rAF
-var hd=document.getElementById('hd');
-var lastY=0,ticking=false;
-function onScroll(){
-  lastY=window.pageYOffset;
-  if(!ticking){
-    requestAnimationFrame(function(){
-      hd.classList.toggle('scrolled',lastY>60);
-      ticking=false;
-    });
-    ticking=true;
-  }
+/* ── LOADER ───────────────────────────────────────────────── */
+function hideLoader(){
+  var l=doc.getElementById('loader');
+  if(l)l.classList.add('done');
 }
-window.addEventListener('scroll',onScroll,{passive:true});
+if(doc.readyState==='complete'){hideLoader()}
+else{win.addEventListener('load',hideLoader,{once:true,passive:true})}
 
-// Scroll lock util
+/* ── HEADER SCROLL (rAF throttle, sem layout thrash) ────────
+   Lê pageYOffset 1x por frame, faz toggle apenas se mudou estado.
+   Custo: ~0.05ms por frame em 240Hz (4ms budget) = invisível.
+*/
+var hd=doc.getElementById('hd');
+var scrolled=false;
+var rafId=null;
+function updateHeader(){
+  var y=win.pageYOffset;
+  var should=y>60;
+  if(should!==scrolled){
+    scrolled=should;
+    hd.classList.toggle('scrolled',should);
+  }
+  rafId=null;
+}
+function onScroll(){
+  if(rafId===null){rafId=requestAnimationFrame(updateHeader)}
+}
+win.addEventListener('scroll',onScroll,{passive:true});
+
+/* ── SCROLL LOCK util (sem reflow) ──────────────────────── */
 function lock(){
-  var y=window.pageYOffset;
-  document.body.style.setProperty('--st',-y+'px');
-  document.documentElement.classList.add('lock');
+  var y=win.pageYOffset;
+  body.style.setProperty('--st',-y+'px');
+  docEl.classList.add('lock');
 }
 function unlock(){
-  var t=document.body.style.getPropertyValue('--st');
-  document.documentElement.classList.remove('lock');
-  document.body.style.removeProperty('--st');
-  window.scrollTo(0,parseInt(t||'0')*-1);
+  var t=body.style.getPropertyValue('--st');
+  docEl.classList.remove('lock');
+  body.style.removeProperty('--st');
+  win.scrollTo(0,parseInt(t||'0')*-1);
 }
 
-// Mobile menu
-var ham=document.getElementById('ham');
-var navM=document.getElementById('navM');
+/* ── MOBILE MENU ──────────────────────────────────────── */
+var ham=doc.getElementById('ham');
+var navM=doc.getElementById('navM');
 ham.addEventListener('click',function(){
-  var open=navM.classList.contains('open');
-  navM.classList.toggle('open');
-  ham.classList.toggle('on');
-  ham.setAttribute('aria-expanded',!open);
-  if(!open)lock();else unlock();
+  var open=navM.classList.toggle('open');
+  ham.classList.toggle('on',open);
+  ham.setAttribute('aria-expanded',open?'true':'false');
+  if(open)lock();else unlock();
 });
-navM.querySelectorAll('a').forEach(function(l){
-  l.addEventListener('click',function(){
+/* Delegação para fechar mobile menu ao clicar em link */
+navM.addEventListener('click',function(e){
+  if(e.target.tagName==='A'){
     navM.classList.remove('open');
     ham.classList.remove('on');
     ham.setAttribute('aria-expanded','false');
     unlock();
-  });
+  }
 });
 
-// Filters
-var fbtns=document.querySelectorAll('.fbtn');
-var cards=document.querySelectorAll('.p-card');
+/* ── REVEAL com IntersectionObserver ────────────────────
+   Não usa scroll listener. Browser dispara só quando entra na viewport.
+   Custo: zero durante scroll.
+*/
+if('IntersectionObserver' in win){
+  var io=new IntersectionObserver(function(entries){
+    for(var i=0;i<entries.length;i++){
+      var e=entries[i];
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    }
+  },{rootMargin:'0px 0px -10% 0px',threshold:.01});
+  var rvs=doc.querySelectorAll('.rv');
+  for(var i=0;i<rvs.length;i++)io.observe(rvs[i]);
+}else{
+  /* Fallback: revela tudo */
+  var rvs2=doc.querySelectorAll('.rv');
+  for(var j=0;j<rvs2.length;j++)rvs2[j].classList.add('in');
+}
+
+/* ── FILTROS ───────────────────────────────────────── */
+var fbtns=doc.querySelectorAll('.fbtn');
+var cards=doc.querySelectorAll('.p-card');
 fbtns.forEach(function(b){
   b.addEventListener('click',function(){
     fbtns.forEach(function(x){x.classList.remove('on')});
     b.classList.add('on');
     var f=b.dataset.filter;
     cards.forEach(function(c){
-      c.style.display=(f==='all'||c.dataset.cat.indexOf(f)!==-1)?'':'none';
+      var show=f==='all'||c.dataset.cat.indexOf(f)!==-1;
+      c.style.display=show?'':'none';
     });
   });
 });
 
-// Modal
-var modal=document.getElementById('modal');
-var mX=document.getElementById('modalX');
-var mTitle=document.getElementById('mTitle');
-var mCat=document.getElementById('mCat');
+/* ── MODAL ───────────────────────────────────────── */
+var modal=doc.getElementById('modal');
+var mX=doc.getElementById('modalX');
+var mTitle=doc.getElementById('mTitle');
+var mCat=doc.getElementById('mCat');
 var pData={
   1:{t:'Residência Alto Padrão',c:'Residencial'},
   2:{t:'Projeto de Interiores',c:'Interiores'},
@@ -1742,47 +1818,53 @@ cards.forEach(function(c){
 function closeM(){modal.classList.remove('open');unlock()}
 mX.addEventListener('click',closeM);
 modal.addEventListener('click',function(e){if(e.target===modal)closeM()});
-document.addEventListener('keydown',function(e){
+doc.addEventListener('keydown',function(e){
   if(e.key==='Escape'&&modal.classList.contains('open'))closeM();
 });
-document.getElementById('mCTA').addEventListener('click',closeM);
+doc.getElementById('mCTA').addEventListener('click',closeM);
 
-// FAQ
-document.querySelectorAll('.faq-q').forEach(function(b){
-  b.addEventListener('click',function(){
-    var item=b.parentElement;
+/* ── FAQ (delegação, evita N listeners) ───────────────── */
+var faqList=doc.querySelector('.faq-list');
+if(faqList){
+  faqList.addEventListener('click',function(e){
+    var btn=e.target.closest('.faq-q');
+    if(!btn)return;
+    var item=btn.parentElement;
     var ans=item.querySelector('.faq-a');
     var open=item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(function(i){
-      i.classList.remove('open');
-      i.querySelector('.faq-a').style.maxHeight=null;
-      i.querySelector('.faq-q').setAttribute('aria-expanded','false');
-    });
+    /* Fecha todos */
+    var openItems=faqList.querySelectorAll('.faq-item.open');
+    for(var k=0;k<openItems.length;k++){
+      var it=openItems[k];
+      it.classList.remove('open');
+      it.querySelector('.faq-a').style.maxHeight='';
+      it.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    }
     if(!open){
       item.classList.add('open');
       ans.style.maxHeight=ans.scrollHeight+'px';
-      b.setAttribute('aria-expanded','true');
+      btn.setAttribute('aria-expanded','true');
     }
   });
+}
+
+/* ── SMOOTH SCROLL nativo (rAF interno do browser) ─────── */
+doc.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="#"]');
+  if(!a)return;
+  var href=a.getAttribute('href');
+  if(href==='#'||href.length<2)return;
+  var t=doc.querySelector(href);
+  if(!t)return;
+  e.preventDefault();
+  var headerH=hd.getBoundingClientRect().height;
+  var y=t.getBoundingClientRect().top+win.pageYOffset-headerH-10;
+  win.scrollTo({top:y,behavior:'smooth'});
 });
 
-// Smooth scroll - sem JS, deixa CSS fazer
-document.querySelectorAll('a[href^="#"]').forEach(function(l){
-  l.addEventListener('click',function(e){
-    var href=l.getAttribute('href');
-    if(href==='#'||href.length<2)return;
-    var t=document.querySelector(href);
-    if(t){
-      e.preventDefault();
-      var y=t.getBoundingClientRect().top+window.pageYOffset-80;
-      window.scrollTo({top:y,behavior:'smooth'});
-    }
-  });
-});
-
-// Form
-var form=document.getElementById('cForm');
-var suc=document.getElementById('fSuccess');
+/* ── FORM ───────────────────────────────────────── */
+var form=doc.getElementById('cForm');
+var suc=doc.getElementById('fSuccess');
 if(form){
   form.addEventListener('submit',function(e){
     e.preventDefault();
@@ -1791,15 +1873,23 @@ if(form){
   });
 }
 
-// Cookie consent
-var cb=document.getElementById('cookieBanner');
-var ca=document.getElementById('cookieAccept');
-var cd=document.getElementById('cookieDecline');
-try{
-  if(!localStorage.getItem('cookie_consent')){
-    setTimeout(function(){cb.classList.add('show')},2000);
-  }
-}catch(e){}
+/* ── COOKIE CONSENT (idle callback) ────────────────────── */
+var cb=doc.getElementById('cookieBanner');
+var ca=doc.getElementById('cookieAccept');
+var cd=doc.getElementById('cookieDecline');
+function showCookies(){
+  try{
+    if(!localStorage.getItem('cookie_consent')){
+      cb.classList.add('show');
+    }
+  }catch(e){}
+}
+/* Adia para depois do load = não bloqueia LCP */
+if('requestIdleCallback' in win){
+  requestIdleCallback(showCookies,{timeout:3000});
+}else{
+  setTimeout(showCookies,2500);
+}
 ca.addEventListener('click',function(){
   try{localStorage.setItem('cookie_consent','accepted')}catch(e){}
   cb.classList.remove('show');
@@ -1808,9 +1898,6 @@ cd.addEventListener('click',function(){
   try{localStorage.setItem('cookie_consent','declined')}catch(e){}
   cb.classList.remove('show');
 });
-
-// Smooth scroll no html (CSS)
-document.documentElement.style.scrollBehavior='smooth';
 
 })();
 </script>
