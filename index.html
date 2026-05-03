@@ -299,38 +299,30 @@ ul,ol{list-style:none}
   align-items:center;
   justify-content:center;
   gap:2.5rem;
-  transition:opacity .6s ease,visibility .6s ease;
+  transition:opacity .35s ease,visibility .35s ease;
   padding:2rem;
 }
 .loader.done{opacity:0;visibility:hidden;pointer-events:none}
 .loader-logo{
   width:auto;
   height:auto;
-  max-width:min(380px, 70vw);
-  max-height:140px;
+  max-width:min(720px, 88vw);
+  max-height:280px;
   object-fit:contain;
-  opacity:0;
-  animation:loaderFadeIn .7s ease-out .05s forwards;
-}
-@keyframes loaderFadeIn{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:translateY(0)}
 }
 .loader-bar{
-  width:140px;
+  width:160px;
   height:1px;
   background:rgba(139,112,72,.18);
   position:relative;
   overflow:hidden;
-  opacity:0;
-  animation:loaderFadeIn .5s ease-out .3s forwards;
 }
 .loader-bar::after{
   content:'';
   position:absolute;
   inset:0;
   background:var(--gold);
-  animation:bar 1.4s cubic-bezier(.4,0,.2,1) infinite;
+  animation:bar 1.2s cubic-bezier(.4,0,.2,1) infinite;
   transform:translate3d(-100%,0,0);
 }
 @keyframes bar{
@@ -339,10 +331,14 @@ ul,ol{list-style:none}
   100%{transform:translate3d(100%,0,0)}
 }
 
-/* Mobile: loader ainda mais reduzido */
+/* Mobile */
+@media (max-width:1024px){
+  .loader-logo{max-width:min(420px, 78vw);max-height:180px}
+  .loader-bar{width:130px}
+}
 @media (max-width:640px){
-  .loader-logo{max-width:min(280px, 80vw);max-height:100px}
-  .loader-bar{width:100px}
+  .loader-logo{max-width:min(320px, 80vw);max-height:130px}
+  .loader-bar{width:110px}
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2197,18 +2193,11 @@ var body=doc.body;
 var win=window;
 
 /* ── LOADER ───────────────────────────────────────────── */
-var loaderStart=Date.now();
-var MIN_LOADER_TIME=900; // ms - tempo mínimo pro loader aparecer
 function hideLoader(){
   var l=doc.getElementById('loader');
   if(!l)return;
-  var elapsed=Date.now()-loaderStart;
-  var wait=Math.max(0,MIN_LOADER_TIME-elapsed);
-  setTimeout(function(){
-    l.classList.add('done');
-    // Remover do DOM após a transição pra liberar memória
-    setTimeout(function(){l.parentNode&&l.parentNode.removeChild(l)},700);
-  },wait);
+  l.classList.add('done');
+  setTimeout(function(){l.parentNode&&l.parentNode.removeChild(l)},500);
 }
 if(doc.readyState==='complete'){hideLoader()}
 else{win.addEventListener('load',hideLoader,{once:true,passive:true})}
