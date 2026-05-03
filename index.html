@@ -1039,7 +1039,7 @@ ul,ol{list-style:none}
 .proc-head .label{margin-bottom:1.25rem}
 .proc-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(8,1fr);
   gap:0;
   border-top:1px solid var(--border);
   border-left:1px solid var(--border);
@@ -1051,7 +1051,12 @@ ul,ol{list-style:none}
   border-right:1px solid var(--border);
   border-bottom:1px solid var(--border);
   position:relative;
+  grid-column:span 2;
 }
+/* 7 passos: linha 1 com 4 (cols 1-8), linha 2 com 3 centralizados (cols 2-7) */
+.proc-step:nth-child(5){grid-column:2 / span 2}
+.proc-step:nth-child(6){grid-column:span 2}
+.proc-step:nth-child(7){grid-column:span 2}
 .proc-step:hover{background:rgba(139,112,72,.04)}
 .proc-step::after{
   content:'';
@@ -1599,6 +1604,7 @@ ul,ol{list-style:none}
   .about-grid{grid-template-columns:1fr}
   .about-img{max-height:500px}
   .proc-grid{grid-template-columns:repeat(2,1fr)}
+  .proc-step{grid-column:auto !important}
   .tl-track{grid-template-columns:repeat(2,1fr)}
   .form-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
@@ -1952,10 +1958,9 @@ ul,ol{list-style:none}
       <div class="proc-step"><p class="proc-n">02</p><h3>Leitura do espaço</h3><p>Análise técnica, e sensorial do ambiente — limitações, luz, proporções, e potenciais de intervenção.</p></div>
       <div class="proc-step"><p class="proc-n">03</p><h3>Conceito autoral</h3><p>Definição da identidade do projeto, linguagem, atmosfera, paleta de cores, e materiais, com direção e estética.</p></div>
       <div class="proc-step"><p class="proc-n">04</p><h3>Direção estética</h3><p>Composição visual que integra texturas, cores, iluminação, e volumetria, em um discurso coerente.</p></div>
-      <div class="proc-step"><p class="proc-n">05</p><h3>Desenvolvimento técnico</h3><p>Plantas, detalhamentos, renders, e especificações com rigor profissional, e atenção ao milímetro.</p></div>
-      <div class="proc-step"><p class="proc-n">06</p><h3>Curadoria de materiais</h3><p>Seleção criteriosa de revestimentos, marcenaria, iluminação, e acabamentos de alta qualidade.</p></div>
-      <div class="proc-step"><p class="proc-n">07</p><h3>Execução ou acompanhamento</h3><p>Gerenciamento, e supervisão quando aplicável, garantindo fidelidade absoluta ao conceito.</p></div>
-      <div class="proc-step"><p class="proc-n">08</p><h3>Entrega e refinamento</h3><p>Documentação completa, memorial descritivo, e ajustes finais para o resultado permanecer.</p></div>
+      <div class="proc-step"><p class="proc-n">05</p><h3>Curadoria de materiais</h3><p>Seleção criteriosa de revestimentos, marcenaria, iluminação, e acabamentos de alta qualidade.</p></div>
+      <div class="proc-step"><p class="proc-n">06</p><h3>Execução ou acompanhamento</h3><p>Gerenciamento, e supervisão quando aplicável, garantindo fidelidade absoluta ao conceito.</p></div>
+      <div class="proc-step"><p class="proc-n">07</p><h3>Entrega e refinamento</h3><p>Documentação completa, memorial descritivo, e ajustes finais para o resultado permanecer.</p></div>
     </div>
   </div>
 </section>
