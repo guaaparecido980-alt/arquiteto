@@ -403,36 +403,51 @@ ul,ol{list-style:none}
 .ham{
   display:none;
   position:relative;
-  width:44px;
-  height:44px;
+  width:48px;
+  height:48px;
   border:0;
   background:transparent;
   cursor:pointer;
   padding:0;
   z-index:1200;
-  overflow:visible;
   forced-color-adjust:none;
+  align-items:center;
+  justify-content:center;
 }
-.ham.on{position:fixed;right:1.5rem;top:max(1.5rem, env(safe-area-inset-top));transform:none;background:rgba(255,255,255,.85);border-radius:50%}
-.ham span{
+.ham.on{visibility:hidden}
+.ham-icon{
   position:absolute;
-  left:9px;
+  top:50%;
+  left:50%;
   width:26px;
-  height:2px;
-  background:#1A1A1A;
-  transition:transform .25s ease,opacity .2s ease,top .25s ease;
-  transform-origin:center;
-  border-radius:2px;
-  forced-color-adjust:none;
+  height:26px;
+  margin-top:-13px;
+  margin-left:-13px;
 }
-.ham span:nth-child(1){top:14px}
-.ham span:nth-child(2){top:21px}
-.ham span:nth-child(3){top:28px}
-/* Estado X */
-.ham.on span{background:#1A1A1A}
-.ham.on span:nth-child(1){top:21px;transform:rotate(45deg)}
-.ham.on span:nth-child(2){opacity:0}
-.ham.on span:nth-child(3){top:21px;transform:rotate(-45deg)}
+.ham-icon line{stroke:#1A1A1A !important;stroke-width:1.75 !important}
+.ham-icon-close{display:none}
+
+/* Botão X dentro do menu mobile - fechar */
+.nav-m-close{
+  position:absolute;
+  top:max(1.5rem, env(safe-area-inset-top));
+  right:1.5rem;
+  width:48px;
+  height:48px;
+  border:1px solid #1A1A1A;
+  background:#fff;
+  border-radius:50%;
+  cursor:pointer;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+  transition:background-color .25s ease,transform .35s ease;
+}
+.nav-m-close:hover{background:#1A1A1A}
+.nav-m-close:hover svg line{stroke:#fff !important}
+.nav-m-close svg{width:24px;height:24px}
 
 /* Mobile Nav */
 .nav-m{
@@ -457,21 +472,47 @@ ul,ol{list-style:none}
   font-weight:300;
   color:var(--stone);
   transition:color .2s ease;
+  letter-spacing:-.005em;
 }
 .nav-m a:hover{color:var(--gold)}
 .nav-m-cta{
-  margin-top:2rem;
+  position:relative;
+  margin-top:2.5rem;
   font-family:var(--ff-l);
-  font-size:.6875rem;
+  font-size:.75rem !important;
   font-weight:500;
-  letter-spacing:.18em;
+  letter-spacing:.22em;
   text-transform:uppercase;
-  color:var(--gold);
-  padding:1rem 2.5rem;
-  border:1px solid rgba(184,154,99,.4);
-  transition:background-color .2s ease,color .2s ease;
+  color:#fff !important;
+  background:#1A1A1A;
+  padding:1.25rem 3rem !important;
+  border:1px solid #1A1A1A;
+  display:inline-flex !important;
+  align-items:center;
+  gap:.75rem;
+  overflow:hidden;
+  isolation:isolate;
+  transition:color .35s ease;
+  box-shadow:0 8px 24px rgba(26,26,26,.18);
 }
-.nav-m-cta:hover{background:var(--gold);color:#fff}
+.nav-m-cta::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .45s cubic-bezier(.7,0,.3,1);
+}
+.nav-m-cta::after{
+  content:'→';
+  margin-left:.25rem;
+  transition:transform .35s cubic-bezier(.7,0,.3,1);
+}
+.nav-m-cta:hover{color:#fff !important;border-color:var(--gold)}
+.nav-m-cta:hover::before{transform:scaleX(1)}
+.nav-m-cta:hover::after{transform:translate3d(6px,0,0)}
 
 /* ═══════════════════════════════════════════════════════════
    HERO
@@ -1572,7 +1613,7 @@ ul,ol{list-style:none}
    ═══════════════════════════════════════════════════════════ */
 @media(max-width:1024px){
   .nav-d{display:none}
-  .ham{display:block;position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);z-index:2}
+  .ham{display:flex;position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);z-index:1200}
   .hd{--hd-h:160px;padding:.5rem 0}
   .hd.scrolled{--hd-h:120px}
   .hd-inner{position:relative;justify-content:flex-start;min-height:calc(var(--hd-h) - 1rem)}
@@ -1700,19 +1741,29 @@ ul,ol{list-style:none}
       <a href="https://wa.me/5541999872997?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." target="_blank" rel="noopener" class="nav-cta">Solicitar análise</a>
     </nav>
     <button class="ham" id="ham" aria-label="Abrir menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+      <svg class="ham-icon ham-icon-menu" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="3" y1="7" x2="21" y2="7" stroke="#1A1A1A" stroke-width="1.75" stroke-linecap="round"/>
+        <line x1="3" y1="12" x2="21" y2="12" stroke="#1A1A1A" stroke-width="1.75" stroke-linecap="round"/>
+        <line x1="3" y1="17" x2="21" y2="17" stroke="#1A1A1A" stroke-width="1.75" stroke-linecap="round"/>
+      </svg>
     </button>
   </div>
 </header>
 
 <nav class="nav-m" id="navM" aria-label="Menu mobile">
+  <button class="nav-m-close" id="navMClose" aria-label="Fechar menu">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="6" y1="6" x2="18" y2="18" stroke="#1A1A1A" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="18" y1="6" x2="6" y2="18" stroke="#1A1A1A" stroke-width="1.75" stroke-linecap="round"/>
+    </svg>
+  </button>
   <a href="#inicio">Início</a>
   <a href="#portfolio">Projetos</a>
   <a href="#sobre">Sobre</a>
   <a href="#processo">Processo</a>
   <a href="#trajetoria">Trajetória</a>
   <a href="#contato">Contato</a>
-  <a href="https://wa.me/5541999872997?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." target="_blank" rel="noopener" class="nav-m-cta">Solicitar análise →</a>
+  <a href="https://wa.me/5541999872997?text=Ol%C3%A1%2C%20gostaria%20de%20apresentar%20um%20projeto%20para%20an%C3%A1lise." target="_blank" rel="noopener" class="nav-m-cta">Solicitar análise</a>
 </nav>
 
 <main>
@@ -2182,18 +2233,25 @@ function unlock(){
 /* ── MOBILE MENU ──────────────────────────────────── */
 var ham=doc.getElementById('ham');
 var navM=doc.getElementById('navM');
+var navMClose=doc.getElementById('navMClose');
+function closeMenuMobile(){
+  navM.classList.remove('open');
+  ham.classList.remove('on');
+  ham.setAttribute('aria-expanded','false');
+  unlock();
+}
 ham.addEventListener('click',function(){
   var open=navM.classList.toggle('open');
   ham.classList.toggle('on',open);
   ham.setAttribute('aria-expanded',open?'true':'false');
   if(open)lock();else unlock();
 });
+if(navMClose){
+  navMClose.addEventListener('click',closeMenuMobile);
+}
 navM.addEventListener('click',function(e){
   if(e.target.tagName==='A'){
-    navM.classList.remove('open');
-    ham.classList.remove('on');
-    ham.setAttribute('aria-expanded','false');
-    unlock();
+    closeMenuMobile();
   }
 });
 
