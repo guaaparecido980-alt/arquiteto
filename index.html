@@ -30,7 +30,7 @@
 <link rel="dns-prefetch" href="https://wa.me">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Manrope:wght@400;500&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Manrope:wght@300;400;500&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 
 <link rel="preload" as="image" href="logo-wander.png" fetchpriority="high">
 <link rel="preload" as="image" href="foto-hero.webp" type="image/webp" fetchpriority="high">
@@ -73,18 +73,20 @@ img.logo-img,img.loader-logo{
 
 :root{
   --bg:#F8F5EF;
-  --bg-alt:#F1ECE3;
+  --bg-alt:#EDE7DB;
+  --bg-deep:#1A1A1A;
   --surface:#F4F2EC;
   --text:#1A1A1A;
   --text-soft:#2D2D2D;
   --stone:#6B6560;
   --beige:#8A7D6B;
-  --gold:#B89A63;
-  --gold-rich:#C5A46D;
-  --gold-deep:#A88547;
+  --gold:#8B7048;
+  --gold-rich:#9D8156;
+  --gold-deep:#735A38;
+  --champagne:#C9B58A;
   --border:rgba(0,0,0,.08);
   --border-h:rgba(0,0,0,.15);
-  --ff-d:'Cormorant Garamond',Georgia,serif;
+  --ff-d:'Cormorant',Georgia,serif;
   --ff-b:'Manrope',sans-serif;
   --ff-l:'Montserrat',sans-serif;
   --c:1340px;
@@ -165,7 +167,8 @@ ul,ol{list-style:none}
 }
 .label::before{content:'';width:24px;height:1px;background:var(--gold)}
 
-.sec{padding:clamp(3rem,6vw,5rem) 0;position:relative}
+.sec{padding:clamp(5rem,10vw,9rem) 0;position:relative}
+.sec.alt{background:var(--bg-alt)}
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
 
 /* ═══════════════════════════════════════════════════════════
@@ -181,31 +184,50 @@ ul,ol{list-style:none}
 /* ═══════════════════════════════════════════════════════════
    TIPOGRAFIA
    ═══════════════════════════════════════════════════════════ */
-.t-hero{font-family:var(--ff-d);font-size:clamp(2.25rem,4.2vw,3.75rem);font-weight:300;line-height:1.08;letter-spacing:-.02em}
-.t-xl{font-family:var(--ff-d);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;line-height:1.1;letter-spacing:-.02em}
+.t-hero{font-family:var(--ff-d);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:-.035em}
+.t-xl{font-family:var(--ff-d);font-size:clamp(2.25rem,4.8vw,3.75rem);font-weight:300;line-height:1.08;letter-spacing:-.025em}
 .t-body{font-size:clamp(.9375rem,1.2vw,1.0625rem);line-height:1.85;color:var(--stone)}
 
 /* ═══════════════════════════════════════════════════════════
    BOTÕES
    ═══════════════════════════════════════════════════════════ */
 .btn{
+  position:relative;
   display:inline-flex;
   align-items:center;
   gap:.75rem;
-  padding:1.125rem 2.25rem;
+  padding:1.25rem 2.75rem;
   font-family:var(--ff-l);
   font-size:.6875rem;
   font-weight:500;
-  letter-spacing:.18em;
+  letter-spacing:.2em;
   text-transform:uppercase;
-  transition:background-color .2s ease,color .2s ease,border-color .2s ease;
+  overflow:hidden;
+  isolation:isolate;
+  transition:color .35s ease;
 }
+.btn::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .45s cubic-bezier(.7,0,.3,1);
+}
+.btn:hover::before{transform:scaleX(1)}
 .btn-gold{color:#fff;background:var(--gold);border:1px solid var(--gold)}
-.btn-gold:hover{background:transparent;color:var(--gold)}
-.btn-ghost{color:var(--text);background:transparent;border:1px solid var(--border-h)}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.btn::after{content:'→';transition:transform .2s ease}
-.btn:hover::after{transform:translate3d(4px,0,0)}
+.btn-gold::before{background:#1A1A1A}
+.btn-gold:hover{color:#fff;border-color:#1A1A1A}
+.btn-ghost{color:var(--text);background:transparent;border:1px solid var(--text)}
+.btn-ghost::before{background:var(--text)}
+.btn-ghost:hover{color:#fff;border-color:var(--text)}
+.btn::after{content:'→';transition:transform .35s cubic-bezier(.7,0,.3,1)}
+.btn:hover::after{transform:translate3d(6px,0,0)}
+/* CTA dentro de seção dark */
+.sec.dark .btn-ghost{color:#F8F5EF;border-color:#F8F5EF}
+.sec.dark .btn-ghost::before{background:#F8F5EF}
+.sec.dark .btn-ghost:hover{color:#1A1A1A}
 
 /* ═══════════════════════════════════════════════════════════
    PLACEHOLDERS
@@ -790,6 +812,19 @@ ul,ol{list-style:none}
   text-transform:uppercase;
   color:var(--stone);
 }
+
+/* SEÇÃO ESCURA (Sobre) — corte editorial estilo magazine */
+.sec.dark{background:var(--bg-deep);color:#EDE7DB;padding:clamp(8rem,14vw,14rem) 0}
+.sec.dark .label{color:var(--champagne)}
+.sec.dark .t-xl{color:#F8F5EF}
+.sec.dark .t-body,.sec.dark p{color:#C8C2B5}
+.sec.dark .about-txt .label{color:var(--champagne)}
+.sec.dark .about-role{color:var(--champagne)}
+.sec.dark .about-highlights{border-color:rgba(255,255,255,.12)}
+.sec.dark .about-hl+.about-hl{border-left-color:rgba(255,255,255,.12)}
+.sec.dark .about-hl-val{color:var(--champagne)}
+.sec.dark .about-hl-label{color:#A8A29A}
+.sec.dark .about-photo{filter:brightness(.95) contrast(1.05)}
 
 /* Signature */
 .signature-sec{padding:clamp(5rem,10vw,8rem) 0;background:var(--surface);contain:layout paint}
@@ -1423,7 +1458,7 @@ ul,ol{list-style:none}
 
 <div class="divider"></div>
 
-<section class="manifesto sec cv">
+<section class="manifesto sec alt cv">
   <div class="container manifesto-inner">
     <h2>Luxo não é excesso.<br>É intenção.</h2>
     <p class="t-body">Um espaço sofisticado, não nasce da quantidade de elementos, mas da precisão das escolhas. Proporção, luz, textura, e identidade, constroem ambientes que permanecem.</p>
@@ -1511,7 +1546,7 @@ ul,ol{list-style:none}
   </div>
 </section>
 
-<section class="ba sec cv">
+<section class="ba sec alt cv">
   <div class="container">
     <div class="ba-head">
       <span class="label">Transformações</span>
@@ -1541,7 +1576,7 @@ ul,ol{list-style:none}
 
 <div class="divider"></div>
 
-<section class="sec cv" id="sobre">
+<section class="sec dark cv" id="sobre">
   <div class="container about-grid">
     <div class="about-img">
       <img src="foto-arquiteto.jpg" alt="Wander Aguiar — Arquiteto e Designer de Interiores" loading="lazy" decoding="async" class="about-photo" width="600" height="800">
@@ -1603,7 +1638,7 @@ ul,ol{list-style:none}
   </div>
 </section>
 
-<section class="proc sec cv" id="processo">
+<section class="proc sec alt cv" id="processo">
   <div class="container">
     <div class="proc-head">
       <span class="label">Método</span>
