@@ -193,46 +193,6 @@ ul,ol{list-style:none}
 /* ═══════════════════════════════════════════════════════════
    TIPOGRAFIA
    ═══════════════════════════════════════════════════════════ */
-/* ── CURSOR CUSTOMIZADO em cards de projeto (desktop only) ── */
-@media (hover: hover) and (pointer: fine){
-  .port-grid{cursor:default}
-  #projectCursor{
-    position:fixed;
-    top:0;left:0;
-    width:108px;
-    height:108px;
-    border:1px solid var(--gold);
-    border-radius:50%;
-    pointer-events:none;
-    transform:translate3d(-100px,-100px,0) scale(.7);
-    transform-origin:center;
-    opacity:0;
-    transition:opacity .25s ease,transform .25s cubic-bezier(.7,0,.3,1);
-    z-index:5000;
-    background:rgba(248,245,239,.65);
-    -webkit-backdrop-filter:blur(8px);
-    backdrop-filter:blur(8px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  #projectCursor.active{opacity:1;transform:translate3d(var(--cx),var(--cy),0) scale(1)}
-  #projectCursor span{
-    font-family:var(--ff-l);
-    font-size:.5625rem;
-    font-weight:500;
-    letter-spacing:.22em;
-    text-transform:uppercase;
-    color:var(--gold);
-    text-align:center;
-    line-height:1.4;
-  }
-  .port-grid:hover .p-card{cursor:none}
-}
-@media not all and (hover: hover){
-  #projectCursor{display:none}
-}
-
 .t-hero{font-family:var(--ff-d);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:-.035em}
 .t-xl{font-family:var(--ff-d);font-size:clamp(2.25rem,4.8vw,3.75rem);font-weight:300;line-height:1.08;letter-spacing:-.025em;position:relative}
 /* Linha dourada que se desenha antes do título (estilo "régua de arquiteto") */
@@ -1338,8 +1298,8 @@ ul,ol{list-style:none}
    ═══════════════════════════════════════════════════════════ */
 .footer{
   padding:clamp(5rem,8vw,7rem) 0 calc(2rem + env(safe-area-inset-bottom));
-  background:var(--bg-deep);
-  color:#C8C2B5;
+  background:var(--bg);
+  border-top:1px solid var(--border);
   contain:layout paint;
 }
 .footer-grid{
@@ -1348,16 +1308,15 @@ ul,ol{list-style:none}
   gap:4rem;
   margin-bottom:4rem;
   padding-bottom:3rem;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid var(--border);
 }
 .footer-brand .logo{margin-bottom:1.5rem}
-.footer-brand .logo-img{filter:brightness(0) invert(1) opacity(.9)}
 .footer-desc{
   font-family:var(--ff-d);
   font-size:.9375rem;
   font-weight:400;
   font-style:italic;
-  color:#C8C2B5;
+  color:var(--stone);
   line-height:1.65;
   max-width:320px;
 }
@@ -1367,19 +1326,19 @@ ul,ol{list-style:none}
   font-weight:500;
   letter-spacing:.25em;
   text-transform:uppercase;
-  color:var(--champagne);
+  color:var(--gold);
   margin-bottom:1.5rem;
 }
 .footer-col a{
   display:block;
   font-family:var(--ff-l);
   font-size:.8125rem;
-  color:#A8A29A;
+  color:var(--stone);
   padding:.4rem 0;
   letter-spacing:.02em;
   transition:color .35s ease,padding-left .35s ease;
 }
-.footer-col a:hover{color:var(--champagne);padding-left:.4rem}
+.footer-col a:hover{color:var(--gold);padding-left:.4rem}
 .footer-bottom{
   display:flex;
   justify-content:space-between;
@@ -1393,12 +1352,12 @@ ul,ol{list-style:none}
   font-size:.625rem;
   letter-spacing:.18em;
   text-transform:uppercase;
-  color:rgba(168,162,154,.6);
+  color:rgba(107,101,96,.5);
 }
 .footer-lgpd{
   font-family:var(--ff-l);
   font-size:.625rem;
-  color:rgba(168,162,154,.4);
+  color:rgba(107,101,96,.45);
   max-width:520px;
   text-align:right;
   line-height:1.6;
@@ -1715,8 +1674,6 @@ ul,ol{list-style:none}
 </style>
 </head>
 <body>
-
-<div id="projectCursor"><span>Ver<br>projeto</span></div>
 
 <div class="loader" id="loader">
   <img fetchpriority="high" decoding="async" src="logo-wander.png" alt="" class="loader-logo" width="500" height="500">
@@ -2424,34 +2381,6 @@ if('IntersectionObserver' in window){
   },{rootMargin:'-10% 0px -5% 0px',threshold:0.1});
   var draws=doc.querySelectorAll('.draws');
   for(var d=0;d<draws.length;d++)revealIO.observe(draws[d]);
-}
-
-/* ── CURSOR CUSTOMIZADO em cards (desktop) ────────── */
-var pCursor=doc.getElementById('projectCursor');
-var portGrid=doc.getElementById('portGrid');
-if(pCursor&&portGrid&&matchMedia('(hover:hover) and (pointer:fine)').matches){
-  var cursorActive=false,cursorRaf=null,lastX=0,lastY=0;
-  function moveCursor(x,y){
-    pCursor.style.setProperty('--cx',(x-54)+'px');
-    pCursor.style.setProperty('--cy',(y-54)+'px');
-  }
-  portGrid.addEventListener('mousemove',function(e){
-    lastX=e.clientX;lastY=e.clientY;
-    if(!cursorActive){
-      cursorActive=true;
-      pCursor.classList.add('active');
-    }
-    if(!cursorRaf){
-      cursorRaf=requestAnimationFrame(function(){
-        moveCursor(lastX,lastY);
-        cursorRaf=null;
-      });
-    }
-  });
-  portGrid.addEventListener('mouseleave',function(){
-    cursorActive=false;
-    pCursor.classList.remove('active');
-  });
 }
 
 /* ── FAQ (event delegation) ────────────────────────── */
