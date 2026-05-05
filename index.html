@@ -1546,36 +1546,63 @@ ul,ol{list-style:none}
   mix-blend-mode:multiply;
 }
 .modal-hero img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.04)}
-/* Subtítulo sobreposto na imagem hero do modal — estilo editorial premium */
+/* Título completo sobreposto na imagem hero — estilo editorial premium AD/Dezeen */
 .modal-hero-caption{
   position:absolute;
   left:0;right:0;bottom:0;
-  padding:clamp(2rem,4vw,3.5rem) clamp(1.5rem,3vw,2.5rem) clamp(1.25rem,2.5vw,2rem);
-  background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 50%,transparent 100%);
+  padding:clamp(2.5rem,5vw,4.5rem) clamp(2rem,4vw,3.5rem) clamp(2rem,3.5vw,3rem);
+  background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.65) 45%,rgba(0,0,0,.2) 80%,transparent 100%);
   z-index:2;
   pointer-events:none;
 }
-.modal-hero-caption-inner{
-  display:flex;
+.modal-hero-cat{
+  display:inline-flex;
   align-items:center;
   gap:.875rem;
   font-family:var(--ff-l);
   font-size:.625rem;
   font-weight:500;
-  letter-spacing:.22em;
+  letter-spacing:.25em;
   text-transform:uppercase;
-  color:rgba(255,255,255,.92);
-  line-height:1.6;
+  color:var(--champagne);
+  margin-bottom:1rem;
 }
-.modal-hero-caption-inner::before{
+.modal-hero-cat::before{
   content:'';
   width:24px;
   height:1px;
   background:var(--champagne);
   flex-shrink:0;
 }
-@media(max-width:640px){
-  .modal-hero-caption-inner{font-size:.5rem;letter-spacing:.18em}
+.modal-hero-titulo{
+  font-family:var(--ff-d);
+  font-size:clamp(1.875rem,3.5vw,3rem);
+  font-weight:300;
+  color:#fff;
+  letter-spacing:-.025em;
+  line-height:1.05;
+  margin-bottom:.875rem;
+  max-width:90%;
+}
+.modal-hero-sub{
+  font-family:var(--ff-l);
+  font-size:.6875rem;
+  font-weight:400;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.78);
+  line-height:1.6;
+  max-width:80%;
+}
+@media(max-width:768px){
+  .modal-hero-cat{font-size:.5rem;letter-spacing:.18em;margin-bottom:.75rem}
+  .modal-hero-titulo{font-size:clamp(1.5rem,5vw,2rem);margin-bottom:.625rem}
+  .modal-hero-sub{font-size:.5625rem;letter-spacing:.18em;max-width:100%}
+}
+@media(max-width:480px){
+  .modal-hero-caption{padding:2rem 1.5rem 1.5rem}
+  .modal-hero-titulo{font-size:1.375rem;line-height:1.1}
+  .modal-hero-sub{font-size:.5rem}
 }
 .modal-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3rem}
 .modal-gal-item{
@@ -1630,8 +1657,6 @@ ul,ol{list-style:none}
   grid-template-columns:1fr 1fr;
   gap:3rem 4rem;
   margin-bottom:3.5rem;
-  padding-top:2.5rem;
-  border-top:1px solid var(--border);
 }
 .modal-det h4{
   font-family:var(--ff-l);
@@ -2186,8 +2211,6 @@ ul,ol{list-style:none}
   <div class="modal-box">
     <button class="modal-x" id="modalX" aria-label="Fechar">✕</button>
     <div class="modal-hero" id="mHero"></div>
-    <span class="label modal-label" id="mCat">Categoria</span>
-    <h2 class="modal-title" id="mTitle">Nome do Projeto</h2>
     <div class="modal-details" id="mDetails"></div>
     <div class="modal-gallery-title" id="mGalTitle">Galeria do Projeto</div>
     <div class="modal-gal" id="mGallery"></div>
@@ -2318,8 +2341,6 @@ fbtns.forEach(function(b){
 /* ── MODAL ──────────────────────────────────────── */
 var modal=doc.getElementById('modal');
 var mX=doc.getElementById('modalX');
-var mTitle=doc.getElementById('mTitle');
-var mCat=doc.getElementById('mCat');
 var mHero=doc.getElementById('mHero');
 var mGallery=doc.getElementById('mGallery');
 var mDetails=doc.getElementById('mDetails');
@@ -2433,13 +2454,15 @@ var pData={
 };
 
 function buildModal(d){
-  /* Hero com caption sobreposta (sub aparece sobre a imagem, estilo editorial) */
-  var captionHTML=d.sub?'<div class="modal-hero-caption"><div class="modal-hero-caption-inner">'+d.sub+'</div></div>':'';
-  mHero.innerHTML='<img src="'+d.hero+'" alt="'+d.t+'" loading="eager" decoding="async" width="1600" height="900">'+captionHTML;
-  
-  /* Header */
-  mTitle.textContent=d.t;
-  mCat.textContent=d.c;
+  /* Hero com TUDO sobreposto na imagem: categoria + título + subtítulo (estilo capa de revista) */
+  var subHTML=d.sub?'<p class="modal-hero-sub">'+d.sub+'</p>':'';
+  mHero.innerHTML=
+    '<img src="'+d.hero+'" alt="'+d.t+'" loading="eager" decoding="async" width="1600" height="900">'+
+    '<div class="modal-hero-caption">'+
+      '<span class="modal-hero-cat">'+d.c+'</span>'+
+      '<h2 class="modal-hero-titulo">'+d.t+'</h2>'+
+      subHTML+
+    '</div>';
   
   /* Details */
   var detailsHTML='';
