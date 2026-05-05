@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <url>
+    <loc>https://www.wanderaguiar.com.br/</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.wanderaguiar.com.br/foto-hero.webp</image:loc>
+      <image:title>Wander Aguiar - Designer de Interiores e Arquitetura</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.wanderaguiar.com.br/card-1.webp</image:loc>
+      <image:title>Residência Alto Padrão</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.wanderaguiar.com.br/card-2.webp</image:loc>
+      <image:title>Living Contemporâneo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.wanderaguiar.com.br/card-3.webp</image:loc>
+      <image:title>Estúdio 38m² Premiado</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.wanderaguiar.com.br/card-5.webp</image:loc>
+      <image:title>Galeria de Arte Contemporânea</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.wanderaguiar.com.br/card-6.webp</image:loc>
+      <image:title>Clínica Gastro Curitiba</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.wanderaguiar.com.br/privacidade.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.wanderaguiar.com.br/cookies.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+</urlset>

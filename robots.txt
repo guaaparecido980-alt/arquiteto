@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://www.wanderaguiar.com.br/sitemap.xml
