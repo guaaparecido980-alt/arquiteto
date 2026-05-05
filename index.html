@@ -54,7 +54,7 @@ html{color-scheme:light only;forced-color-adjust:none}
   html,body{background:#F8F5EF !important;color:#1A1A1A !important}
 }
 /* Protege logo PNG transparente do "auto dark mode" do Chrome/Mi Browser */
-img.logo-img,img.loader-logo{
+img.logo-img{
   filter:none !important;
   background:transparent !important;
   forced-color-adjust:none;
@@ -284,61 +284,6 @@ ul,ol{list-style:none}
   color:rgba(138,133,128,.6);
   max-width:180px;
   line-height:1.8;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   LOADER
-   ═══════════════════════════════════════════════════════════ */
-.loader{
-  position:fixed;
-  inset:0;
-  background:var(--bg);
-  z-index:9999;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:2.5rem;
-  transition:opacity .35s ease,visibility .35s ease;
-  padding:2rem;
-}
-.loader.done{opacity:0;visibility:hidden;pointer-events:none}
-.loader-logo{
-  width:auto;
-  height:auto;
-  max-width:min(720px, 88vw);
-  max-height:280px;
-  object-fit:contain;
-}
-.loader-bar{
-  width:160px;
-  height:1px;
-  background:rgba(139,112,72,.18);
-  position:relative;
-  overflow:hidden;
-}
-.loader-bar::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:var(--gold);
-  animation:bar 1.2s cubic-bezier(.4,0,.2,1) infinite;
-  transform:translate3d(-100%,0,0);
-}
-@keyframes bar{
-  0%{transform:translate3d(-100%,0,0)}
-  50%{transform:translate3d(0,0,0)}
-  100%{transform:translate3d(100%,0,0)}
-}
-
-/* Mobile */
-@media (max-width:1024px){
-  .loader-logo{max-width:min(420px, 78vw);max-height:180px}
-  .loader-bar{width:130px}
-}
-@media (max-width:640px){
-  .loader-logo{max-width:min(320px, 80vw);max-height:130px}
-  .loader-bar{width:110px}
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1787,11 +1732,6 @@ ul,ol{list-style:none}
 </head>
 <body>
 
-<div class="loader" id="loader">
-  <img fetchpriority="high" decoding="async" src="logo-wander.png" alt="Wander Aguiar — Designer de Interiores e Arquitetura" class="loader-logo" width="580" height="190">
-  <div class="loader-bar"></div>
-</div>
-
 <header class="hd" id="hd" role="banner">
   <div class="container hd-inner">
     <a href="#inicio" class="logo" aria-label="Início">
@@ -2231,16 +2171,6 @@ var doc=document;
 var docEl=doc.documentElement;
 var body=doc.body;
 var win=window;
-
-/* ── LOADER ───────────────────────────────────────────── */
-function hideLoader(){
-  var l=doc.getElementById('loader');
-  if(!l)return;
-  l.classList.add('done');
-  setTimeout(function(){l.parentNode&&l.parentNode.removeChild(l)},500);
-}
-if(doc.readyState==='complete'){hideLoader()}
-else{win.addEventListener('load',hideLoader,{once:true,passive:true})}
 
 /* ── SCROLL HANDLER UNIFICADO ──────────────────────────
    Um único listener cuida de:
