@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -1547,6 +1546,37 @@ ul,ol{list-style:none}
   mix-blend-mode:multiply;
 }
 .modal-hero img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.04)}
+/* Subtítulo sobreposto na imagem hero do modal — estilo editorial premium */
+.modal-hero-caption{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  padding:clamp(2rem,4vw,3.5rem) clamp(1.5rem,3vw,2.5rem) clamp(1.25rem,2.5vw,2rem);
+  background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 50%,transparent 100%);
+  z-index:2;
+  pointer-events:none;
+}
+.modal-hero-caption-inner{
+  display:flex;
+  align-items:center;
+  gap:.875rem;
+  font-family:var(--ff-l);
+  font-size:.625rem;
+  font-weight:500;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.92);
+  line-height:1.6;
+}
+.modal-hero-caption-inner::before{
+  content:'';
+  width:24px;
+  height:1px;
+  background:var(--champagne);
+  flex-shrink:0;
+}
+@media(max-width:640px){
+  .modal-hero-caption-inner{font-size:.5rem;letter-spacing:.18em}
+}
 .modal-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3rem}
 .modal-gal-item{
   aspect-ratio:4/3;
@@ -1567,16 +1597,6 @@ ul,ol{list-style:none}
 .modal-gal-item:hover::after{background:rgba(0,0,0,.08)}
 .modal-gal-item img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.04);transition:transform .6s cubic-bezier(.2,0,.2,1)}
 .modal-gal-item:hover img{transform:scale(1.04)}
-.modal-subtitle{
-  font-family:var(--ff-l);
-  font-size:.6875rem;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--stone);
-  margin-top:-2rem;
-  margin-bottom:3rem;
-  font-weight:400;
-}
 .modal-gallery-title{
   font-family:var(--ff-d);
   font-size:1.25rem;
@@ -2168,7 +2188,6 @@ ul,ol{list-style:none}
     <div class="modal-hero" id="mHero"></div>
     <span class="label modal-label" id="mCat">Categoria</span>
     <h2 class="modal-title" id="mTitle">Nome do Projeto</h2>
-    <p class="modal-subtitle" id="mSubtitle"></p>
     <div class="modal-details" id="mDetails"></div>
     <div class="modal-gallery-title" id="mGalTitle">Galeria do Projeto</div>
     <div class="modal-gal" id="mGallery"></div>
@@ -2301,7 +2320,6 @@ var modal=doc.getElementById('modal');
 var mX=doc.getElementById('modalX');
 var mTitle=doc.getElementById('mTitle');
 var mCat=doc.getElementById('mCat');
-var mSubtitle=doc.getElementById('mSubtitle');
 var mHero=doc.getElementById('mHero');
 var mGallery=doc.getElementById('mGallery');
 var mDetails=doc.getElementById('mDetails');
@@ -2415,13 +2433,13 @@ var pData={
 };
 
 function buildModal(d){
-  /* Hero */
-  mHero.innerHTML='<img src="'+d.hero+'" alt="'+d.t+'" loading="eager" decoding="async" width="1600" height="900">';
+  /* Hero com caption sobreposta (sub aparece sobre a imagem, estilo editorial) */
+  var captionHTML=d.sub?'<div class="modal-hero-caption"><div class="modal-hero-caption-inner">'+d.sub+'</div></div>':'';
+  mHero.innerHTML='<img src="'+d.hero+'" alt="'+d.t+'" loading="eager" decoding="async" width="1600" height="900">'+captionHTML;
   
   /* Header */
   mTitle.textContent=d.t;
   mCat.textContent=d.c;
-  mSubtitle.textContent=d.sub||'';
   
   /* Details */
   var detailsHTML='';
