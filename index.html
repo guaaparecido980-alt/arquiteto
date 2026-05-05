@@ -1546,16 +1546,12 @@ ul,ol{list-style:none}
   mix-blend-mode:multiply;
 }
 .modal-hero img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.04)}
-/* Título completo sobreposto na imagem hero — estilo editorial premium AD/Dezeen */
-.modal-hero-caption{
-  position:absolute;
-  left:0;right:0;bottom:0;
-  padding:clamp(2.5rem,5vw,4.5rem) clamp(2rem,4vw,3.5rem) clamp(2rem,3.5vw,3rem);
-  background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.65) 45%,rgba(0,0,0,.2) 80%,transparent 100%);
-  z-index:2;
-  pointer-events:none;
+/* Header do modal — categoria + título + subtítulo ACIMA da imagem hero */
+.modal-header{
+  margin-bottom:2rem;
+  padding-right:4rem;
 }
-.modal-hero-cat{
+.modal-header-cat{
   display:inline-flex;
   align-items:center;
   gap:.875rem;
@@ -1564,45 +1560,44 @@ ul,ol{list-style:none}
   font-weight:500;
   letter-spacing:.25em;
   text-transform:uppercase;
-  color:var(--champagne);
-  margin-bottom:1rem;
+  color:var(--gold);
+  margin-bottom:1.25rem;
 }
-.modal-hero-cat::before{
+.modal-header-cat::before{
   content:'';
   width:24px;
   height:1px;
-  background:var(--champagne);
+  background:var(--gold);
   flex-shrink:0;
 }
-.modal-hero-titulo{
+.modal-header-titulo{
   font-family:var(--ff-d);
-  font-size:clamp(1.875rem,3.5vw,3rem);
+  font-size:clamp(2rem,3.5vw,3rem);
   font-weight:300;
-  color:#fff;
+  color:var(--text);
   letter-spacing:-.025em;
   line-height:1.05;
   margin-bottom:.875rem;
-  max-width:90%;
 }
-.modal-hero-sub{
+.modal-header-sub{
   font-family:var(--ff-l);
   font-size:.6875rem;
   font-weight:400;
   letter-spacing:.22em;
   text-transform:uppercase;
-  color:rgba(255,255,255,.78);
+  color:var(--stone);
   line-height:1.6;
-  max-width:80%;
 }
 @media(max-width:768px){
-  .modal-hero-cat{font-size:.5rem;letter-spacing:.18em;margin-bottom:.75rem}
-  .modal-hero-titulo{font-size:clamp(1.5rem,5vw,2rem);margin-bottom:.625rem}
-  .modal-hero-sub{font-size:.5625rem;letter-spacing:.18em;max-width:100%}
+  .modal-header{padding-right:3rem;margin-bottom:1.5rem}
+  .modal-header-cat{font-size:.5rem;letter-spacing:.18em;margin-bottom:1rem}
+  .modal-header-titulo{font-size:clamp(1.5rem,5vw,2rem);margin-bottom:.625rem}
+  .modal-header-sub{font-size:.5625rem;letter-spacing:.18em}
 }
 @media(max-width:480px){
-  .modal-hero-caption{padding:2rem 1.5rem 1.5rem}
-  .modal-hero-titulo{font-size:1.375rem;line-height:1.1}
-  .modal-hero-sub{font-size:.5rem}
+  .modal-header{padding-right:2.5rem}
+  .modal-header-titulo{font-size:1.5rem;line-height:1.1}
+  .modal-header-sub{font-size:.5rem}
 }
 .modal-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3rem}
 .modal-gal-item{
@@ -2210,6 +2205,7 @@ ul,ol{list-style:none}
 <div class="modal-o" id="modal" role="dialog" aria-modal="true" aria-label="Detalhes do projeto">
   <div class="modal-box">
     <button class="modal-x" id="modalX" aria-label="Fechar">✕</button>
+    <div class="modal-header" id="mHeader"></div>
     <div class="modal-hero" id="mHero"></div>
     <div class="modal-details" id="mDetails"></div>
     <div class="modal-gallery-title" id="mGalTitle">Galeria do Projeto</div>
@@ -2341,6 +2337,7 @@ fbtns.forEach(function(b){
 /* ── MODAL ──────────────────────────────────────── */
 var modal=doc.getElementById('modal');
 var mX=doc.getElementById('modalX');
+var mHeader=doc.getElementById('mHeader');
 var mHero=doc.getElementById('mHero');
 var mGallery=doc.getElementById('mGallery');
 var mDetails=doc.getElementById('mDetails');
@@ -2454,15 +2451,15 @@ var pData={
 };
 
 function buildModal(d){
-  /* Hero com TUDO sobreposto na imagem: categoria + título + subtítulo (estilo capa de revista) */
-  var subHTML=d.sub?'<p class="modal-hero-sub">'+d.sub+'</p>':'';
-  mHero.innerHTML=
-    '<img src="'+d.hero+'" alt="'+d.t+'" loading="eager" decoding="async" width="1600" height="900">'+
-    '<div class="modal-hero-caption">'+
-      '<span class="modal-hero-cat">'+d.c+'</span>'+
-      '<h2 class="modal-hero-titulo">'+d.t+'</h2>'+
-      subHTML+
-    '</div>';
+  /* Header ACIMA da imagem: categoria + título + subtítulo */
+  var subHTML=d.sub?'<p class="modal-header-sub">'+d.sub+'</p>':'';
+  mHeader.innerHTML=
+    '<span class="modal-header-cat">'+d.c+'</span>'+
+    '<h2 class="modal-header-titulo">'+d.t+'</h2>'+
+    subHTML;
+  
+  /* Hero (imagem limpa, sem sobreposição) */
+  mHero.innerHTML='<img src="'+d.hero+'" alt="'+d.t+'" loading="eager" decoding="async" width="1600" height="900">';
   
   /* Details */
   var detailsHTML='';
