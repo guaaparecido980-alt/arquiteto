@@ -1343,8 +1343,9 @@ ul,ol{list-style:none}
   padding-bottom:3rem;
   border-bottom:1px solid var(--border);
 }
-.footer-brand .logo{margin-bottom:1.5rem;justify-content:flex-start;align-self:flex-start}
-.footer-brand .logo-img-footer{margin-left:0;height:120px !important;width:auto !important;max-width:100%;object-fit:contain}
+.footer-brand{display:flex;flex-direction:column;align-items:flex-start}
+.footer-brand .logo{margin-bottom:1.5rem;display:block}
+.footer-brand .logo-img-footer{margin-left:0;height:120px !important;width:auto !important;max-width:100%;object-fit:contain;display:block}
 .footer-desc{
   font-family:var(--ff-d);
   font-size:.9375rem;
@@ -1700,9 +1701,9 @@ ul,ol{list-style:none}
   .proc-grid{grid-template-columns:1fr}
   .f-row{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr;gap:2.5rem;text-align:center}
-  .footer-brand{display:flex;flex-direction:column;align-items:center}
-  .footer-brand .logo{justify-content:center;align-self:center;margin-bottom:1.25rem}
-  .footer-brand img.logo-img-footer{height:75px !important;width:auto !important;max-width:260px;margin-left:0;margin-right:0;object-fit:contain}
+  .footer-brand{align-items:center;overflow:visible;width:100%}
+  .footer-brand .logo{justify-content:center;align-self:center;margin-bottom:1rem;display:flex;height:auto;line-height:0;width:auto;max-width:100%}
+  .footer-brand img.logo-img-footer{height:50px !important;width:auto !important;max-width:200px !important;margin:0 auto !important;object-fit:contain !important;display:block !important;position:static !important;transform:none !important;aspect-ratio:auto !important}
   .footer-desc{margin-left:auto;margin-right:auto;max-width:400px}
   .footer-col{text-align:center}
   .footer-col h4{margin-bottom:1rem}
@@ -1745,7 +1746,7 @@ ul,ol{list-style:none}
   .cta-btns{flex-direction:column;align-items:center}
   .about-highlights{flex-direction:column}
   .about-hl+.about-hl{border-left:none;border-top:1px solid var(--border)}
-  .footer-brand img.logo-img-footer{height:60px !important;max-width:220px}
+  .footer-brand img.logo-img-footer{height:40px !important;max-width:160px !important}
 }
 
 @media(prefers-reduced-motion:reduce){
