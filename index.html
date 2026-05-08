@@ -1544,6 +1544,111 @@ ul,ol{list-style:none}
 .modal-cta .btn{justify-content:center;margin-top:2.5rem}
 
 /* ═══════════════════════════════════════════════════════════
+   LIGHTBOX — Visualizador de imagem em tela cheia
+   ═══════════════════════════════════════════════════════════ */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(8,8,8,.96);
+  z-index:3000;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .3s ease,visibility .3s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(1.5rem,3vw,3rem);
+  cursor:zoom-out;
+}
+.lightbox.open{opacity:1;visibility:visible}
+.lightbox-img-wrap{
+  position:relative;
+  max-width:95%;
+  max-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:default;
+}
+.lightbox-img{
+  max-width:100%;
+  max-height:90vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  display:block;
+  user-select:none;
+  -webkit-user-drag:none;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+.lightbox-close{
+  position:absolute;
+  top:1.5rem;
+  right:1.5rem;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.2);
+  color:#F8F5EF;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1rem;
+  transition:background-color .25s ease,transform .25s ease;
+  z-index:2;
+}
+.lightbox-close:hover{
+  background:rgba(255,255,255,.18);
+  transform:rotate(90deg);
+}
+.lightbox-prev,.lightbox-next{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.2);
+  color:#F8F5EF;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.25rem;
+  transition:background-color .25s ease,transform .25s ease;
+  z-index:2;
+  font-family:var(--ff-d);
+  line-height:1;
+}
+.lightbox-prev{left:1.5rem}
+.lightbox-next{right:1.5rem}
+.lightbox-prev:hover{background:rgba(255,255,255,.18);transform:translateY(-50%) translateX(-4px)}
+.lightbox-next:hover{background:rgba(255,255,255,.18);transform:translateY(-50%) translateX(4px)}
+.lightbox-counter{
+  position:absolute;
+  bottom:1.5rem;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:var(--ff-l);
+  font-size:.6875rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(248,245,239,.7);
+  z-index:2;
+}
+.modal-gal-item{cursor:zoom-in}
+@media(max-width:768px){
+  .lightbox-prev,.lightbox-next{width:44px;height:44px;font-size:1rem}
+  .lightbox-prev{left:.75rem}
+  .lightbox-next{right:.75rem}
+  .lightbox-close{top:1rem;right:1rem;width:42px;height:42px}
+  .lightbox-counter{bottom:1rem;font-size:.5625rem}
+}
+
+/* ═══════════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════════ */
 @media(max-width:1024px){
@@ -2060,6 +2165,16 @@ ul,ol{list-style:none}
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualização ampliada">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">✕</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Foto anterior">‹</button>
+  <div class="lightbox-img-wrap">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  </div>
+  <button class="lightbox-next" id="lightboxNext" aria-label="Próxima foto">›</button>
+  <span class="lightbox-counter" id="lightboxCounter">1 / 1</span>
+</div>
+
 <div class="modal-o" id="modal" role="dialog" aria-modal="true" aria-label="Detalhes do projeto">
   <div class="modal-box">
     <button class="modal-x" id="modalX" aria-label="Fechar">✕</button>
@@ -2308,7 +2423,7 @@ function buildModal(d){
   var galHTML='';
   for(var j=0;j<d.gallery.length;j++){
     var g=d.gallery[j];
-    galHTML+='<div class="modal-gal-item"><img src="'+g[0]+'" alt="'+g[1]+'" loading="lazy" decoding="async" width="1200" height="800"></div>';
+    galHTML+='<div class="modal-gal-item" data-idx="'+j+'"><img src="'+g[0]+'" alt="'+g[1]+'" loading="lazy" decoding="async" width="1200" height="800"></div>';
   }
   mGallery.innerHTML=galHTML;
 }
@@ -2328,9 +2443,88 @@ function closeM(){modal.classList.remove('open');unlock()}
 mX.addEventListener('click',closeM);
 modal.addEventListener('click',function(e){if(e.target===modal)closeM()});
 doc.addEventListener('keydown',function(e){
-  if(e.key==='Escape'&&modal.classList.contains('open'))closeM();
+  if(e.key==='Escape'&&modal.classList.contains('open')&&!lb.classList.contains('open'))closeM();
 });
 doc.getElementById('mCTA').addEventListener('click',closeM);
+
+/* ── LIGHTBOX (zoom de imagem da galeria) ─────── */
+var lb=doc.getElementById('lightbox');
+var lbImg=doc.getElementById('lightboxImg');
+var lbClose=doc.getElementById('lightboxClose');
+var lbPrev=doc.getElementById('lightboxPrev');
+var lbNext=doc.getElementById('lightboxNext');
+var lbCounter=doc.getElementById('lightboxCounter');
+var lbGallery=[];
+var lbIndex=0;
+
+function lbShow(idx){
+  if(!lbGallery.length)return;
+  if(idx<0)idx=lbGallery.length-1;
+  if(idx>=lbGallery.length)idx=0;
+  lbIndex=idx;
+  var item=lbGallery[idx];
+  lbImg.src=item[0];
+  lbImg.alt=item[1]||'';
+  lbCounter.textContent=(idx+1)+' / '+lbGallery.length;
+  // Esconder setas se só tiver 1 imagem
+  var multi=lbGallery.length>1;
+  lbPrev.style.display=multi?'flex':'none';
+  lbNext.style.display=multi?'flex':'none';
+}
+
+function lbOpen(galleryData,startIdx){
+  lbGallery=galleryData;
+  lbShow(startIdx||0);
+  lb.classList.add('open');
+}
+
+function lbCloseFn(){
+  lb.classList.remove('open');
+  // Limpa src após animação pra liberar memória
+  setTimeout(function(){if(!lb.classList.contains('open'))lbImg.src=''},300);
+}
+
+lbClose.addEventListener('click',lbCloseFn);
+lbPrev.addEventListener('click',function(e){e.stopPropagation();lbShow(lbIndex-1)});
+lbNext.addEventListener('click',function(e){e.stopPropagation();lbShow(lbIndex+1)});
+
+// Click no fundo (fora da imagem) fecha
+lb.addEventListener('click',function(e){
+  if(e.target===lb||e.target.classList.contains('lightbox-img-wrap')){
+    lbCloseFn();
+  }
+});
+
+// Teclado: ESC fecha, setas navegam
+doc.addEventListener('keydown',function(e){
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='Escape')lbCloseFn();
+  else if(e.key==='ArrowLeft')lbShow(lbIndex-1);
+  else if(e.key==='ArrowRight')lbShow(lbIndex+1);
+});
+
+// Swipe touch no mobile
+var touchStartX=0;
+lb.addEventListener('touchstart',function(e){touchStartX=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',function(e){
+  var diff=e.changedTouches[0].clientX-touchStartX;
+  if(Math.abs(diff)>50){
+    if(diff>0)lbShow(lbIndex-1);
+    else lbShow(lbIndex+1);
+  }
+},{passive:true});
+
+// Click em qualquer item da galeria do modal abre o lightbox
+mGallery.addEventListener('click',function(e){
+  var item=e.target.closest('.modal-gal-item');
+  if(!item)return;
+  var idx=parseInt(item.dataset.idx,10)||0;
+  // Pegar a galeria atual baseada nos data-attributes dos itens
+  var items=mGallery.querySelectorAll('.modal-gal-item img');
+  var gal=[];
+  items.forEach(function(img){gal.push([img.src,img.alt])});
+  lbOpen(gal,idx);
+});
 
 /* ── REVEAL ANIMATION (linha dourada se desenha) ───── */
 if('IntersectionObserver' in window){
