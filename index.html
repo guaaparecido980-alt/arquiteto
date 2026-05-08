@@ -195,7 +195,7 @@ ul,ol{list-style:none}
   font-weight:400;
 }
 
-.sec{padding:clamp(5rem,10vw,9rem) 0;position:relative}
+.sec{padding:clamp(3.5rem,6vw,5.5rem) 0;position:relative}
 .sec.alt{background:var(--bg-alt)}
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
 
@@ -206,7 +206,7 @@ ul,ol{list-style:none}
    ═══════════════════════════════════════════════════════════ */
 .cv{
   content-visibility:auto;
-  contain-intrinsic-size:1px 800px;
+  contain-intrinsic-size:1px 500px;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -509,7 +509,7 @@ ul,ol{list-style:none}
   position:relative;
   overflow:hidden;
   background:var(--bg);
-  padding:14rem 0 6rem;
+  padding:14rem 0 4rem;
   contain:layout paint;
 }
 .hero::before{
@@ -649,8 +649,8 @@ ul,ol{list-style:none}
 /* Creds strip */
 .hero-creds-strip{
   max-width:1380px;
-  margin:5rem auto 0;
-  padding:3rem clamp(2rem,5vw,4rem) 0;
+  margin:3.5rem auto 0;
+  padding:2.5rem clamp(2rem,5vw,4rem) 0;
   border-top:1px solid rgba(139,112,72,.25);
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -726,7 +726,7 @@ ul,ol{list-style:none}
   display:flex;
   justify-content:space-between;
   align-items:flex-end;
-  margin-bottom:3.5rem;
+  margin-bottom:2.5rem;
   flex-wrap:wrap;
   gap:2rem;
 }
@@ -841,7 +841,7 @@ ul,ol{list-style:none}
    BEFORE/AFTER
    ═══════════════════════════════════════════════════════════ */
 .ba{background:var(--surface);contain:layout paint}
-.ba-head{text-align:center;max-width:650px;margin:0 auto 4rem}
+.ba-head{text-align:center;max-width:650px;margin:0 auto 2.5rem}
 .ba-head .label{margin-bottom:1rem}
 .ba-head h2{margin-bottom:1.5rem}
 .ba-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
@@ -940,7 +940,7 @@ ul,ol{list-style:none}
 }
 
 /* SEÇÃO ESCURA (Sobre) — corte editorial estilo magazine */
-.sec.dark{background:var(--bg-deep);color:#EDE7DB;padding:clamp(8rem,14vw,14rem) 0}
+.sec.dark{background:var(--bg-deep);color:#EDE7DB;padding:clamp(4rem,7vw,6rem) 0}
 .sec.dark .label{color:var(--champagne)}
 .sec.dark .t-xl{color:#F8F5EF}
 .sec.dark .t-body,.sec.dark p{color:#C8C2B5}
@@ -996,7 +996,7 @@ ul,ol{list-style:none}
    TIMELINE
    ═══════════════════════════════════════════════════════════ */
 .tl{background:var(--surface);contain:layout paint}
-.tl-head{text-align:center;max-width:780px;margin:0 auto 5rem}
+.tl-head{text-align:center;max-width:780px;margin:0 auto 3rem}
 .tl-head .label{margin-bottom:1.25rem}
 .tl-head .label{margin-bottom:1rem}
 .tl-track{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}
@@ -1044,7 +1044,7 @@ ul,ol{list-style:none}
    PROCESS
    ═══════════════════════════════════════════════════════════ */
 .proc{contain:layout paint}
-.proc-head{text-align:center;max-width:720px;margin:0 auto 5rem}
+.proc-head{text-align:center;max-width:720px;margin:0 auto 3rem}
 .proc-head .label{margin-bottom:1.25rem}
 .proc-grid{
   display:grid;
@@ -1104,21 +1104,9 @@ ul,ol{list-style:none}
   color:#F8F5EF;
   text-align:center;
   position:relative;
-  padding:clamp(7rem,12vw,11rem) 0;
+  padding:clamp(4rem,7vw,6rem) 0;
   contain:layout paint;
 }
-.cta-sec::before,.cta-sec::after{
-  content:'';
-  position:absolute;
-  left:50%;
-  width:1px;
-  height:64px;
-  background:var(--champagne);
-  transform:translateX(-50%);
-  opacity:.4;
-}
-.cta-sec::before{top:0}
-.cta-sec::after{bottom:0}
 .cta-inner{max-width:780px;margin:0 auto}
 .cta-inner .label{margin-bottom:2rem;justify-content:center;color:var(--champagne)}
 .cta-inner .label::before{background:var(--champagne)}
@@ -1252,7 +1240,7 @@ ul,ol{list-style:none}
    FAQ
    ═══════════════════════════════════════════════════════════ */
 .faq{background:var(--surface);contain:layout paint}
-.faq-head{text-align:center;max-width:680px;margin:0 auto 4rem}
+.faq-head{text-align:center;max-width:680px;margin:0 auto 2.5rem}
 .faq-head .label{margin-bottom:1.25rem}
 .faq-list{max-width:880px;margin:0 auto}
 .faq-item{border-top:1px solid var(--border);transition:border-color .3s ease}
@@ -1311,7 +1299,7 @@ ul,ol{list-style:none}
    FOOTER
    ═══════════════════════════════════════════════════════════ */
 .footer{
-  padding:clamp(5rem,8vw,7rem) 0 calc(2rem + env(safe-area-inset-bottom));
+  padding:clamp(3.5rem,5vw,5rem) 0 calc(2rem + env(safe-area-inset-bottom));
   background:var(--bg);
   border-top:1px solid var(--border);
   contain:layout paint;
@@ -1320,8 +1308,8 @@ ul,ol{list-style:none}
   display:grid;
   grid-template-columns:2fr 1fr 1fr 1fr;
   gap:4rem;
-  margin-bottom:4rem;
-  padding-bottom:3rem;
+  margin-bottom:2.5rem;
+  padding-bottom:2.5rem;
   border-bottom:1px solid var(--border);
 }
 .footer-brand{display:flex;flex-direction:column;align-items:flex-start}
