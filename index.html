@@ -999,7 +999,7 @@ ul,ol{list-style:none}
 .tl-head{text-align:center;max-width:780px;margin:0 auto 3rem}
 .tl-head .label{margin-bottom:1.25rem}
 .tl-head .label{margin-bottom:1rem}
-.tl-track{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}
+.tl-track{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border);border-left:1px solid var(--border)}
 .tl-item{
   padding:2.5rem 2rem;
   background:transparent;
@@ -1008,7 +1008,6 @@ ul,ol{list-style:none}
   border-right:1px solid var(--border);
   border-bottom:1px solid var(--border);
 }
-.tl-item:last-child{border-right:none}
 .tl-item:hover{background:rgba(139,112,72,.03)}
 .tl-item::before{
   content:'';
@@ -1048,7 +1047,7 @@ ul,ol{list-style:none}
 .proc-head .label{margin-bottom:1.25rem}
 .proc-grid{
   display:grid;
-  grid-template-columns:repeat(8,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:0;
   border-top:1px solid var(--border);
   border-left:1px solid var(--border);
@@ -1060,12 +1059,11 @@ ul,ol{list-style:none}
   border-right:1px solid var(--border);
   border-bottom:1px solid var(--border);
   position:relative;
-  grid-column:span 2;
 }
-/* 7 passos: linha 1 com 4 (cols 1-8), linha 2 com 3 centralizados (cols 2-7) */
-.proc-step:nth-child(5){grid-column:2 / span 2}
-.proc-step:nth-child(6){grid-column:span 2}
-.proc-step:nth-child(7){grid-column:span 2}
+.proc-empty{
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
 .proc-step:hover{background:rgba(139,112,72,.04)}
 .proc-step::after{
   content:'';
@@ -1668,6 +1666,7 @@ ul,ol{list-style:none}
   .p-card-info{display:none}
   .ba-wrap{grid-template-columns:1fr}
   .proc-grid{grid-template-columns:1fr}
+  .proc-empty{display:none}
   .f-row{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr;gap:2.5rem;text-align:center}
   .footer-brand{align-items:center;overflow:visible;width:100%}
@@ -2006,6 +2005,7 @@ ul,ol{list-style:none}
       <div class="proc-step"><p class="proc-n">05</p><h3>Curadoria de materiais</h3><p>Seleção criteriosa de revestimentos, marcenaria, iluminação, e acabamentos de alta qualidade.</p></div>
       <div class="proc-step"><p class="proc-n">06</p><h3>Execução ou acompanhamento</h3><p>Gerenciamento, e supervisão quando aplicável, garantindo fidelidade absoluta ao conceito.</p></div>
       <div class="proc-step"><p class="proc-n">07</p><h3>Entrega, e refinamento</h3><p>Documentação completa, memorial descritivo, e ajustes finais para o resultado permanecer.</p></div>
+      <div class="proc-empty" aria-hidden="true"></div>
     </div>
   </div>
 </section>
