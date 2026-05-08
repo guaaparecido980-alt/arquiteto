@@ -587,65 +587,6 @@ ul,ol{list-style:none}
   display:block;
 }
 
-.hero-badge-num{
-  position:absolute;
-  top:1rem;right:1rem;
-  width:72px;height:72px;
-  background:#fff;
-  border:1px solid rgba(197,164,109,.5);
-  border-radius:50%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:3;
-}
-.hero-badge-num strong{
-  font-family:var(--ff-d);
-  font-size:1.125rem;
-  font-weight:400;
-  color:var(--gold-deep);
-  line-height:1;
-}
-.hero-badge-num span{
-  font-family:var(--ff-l);
-  font-size:.45rem;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:#3A3530;
-  margin-top:.15rem;
-}
-
-.hero-photo-caption{
-  position:absolute;
-  left:1.5rem;
-  bottom:1.5rem;
-  max-width:64%;
-  padding:1.25rem 1.5rem;
-  background:rgba(248,245,239,.95);
-  -webkit-backdrop-filter:blur(8px);
-  backdrop-filter:blur(8px);
-  border-left:2px solid var(--gold);
-  z-index:2;
-}
-.hero-photo-caption .name{
-  font-family:var(--ff-d);
-  font-size:1.25rem;
-  font-weight:300;
-  color:var(--text);
-  line-height:1.1;
-  margin-bottom:.4rem;
-  letter-spacing:-.005em;
-}
-.hero-photo-caption .role{
-  font-family:var(--ff-l);
-  font-size:.4375rem;
-  letter-spacing:.32em;
-  text-transform:uppercase;
-  color:var(--gold);
-  font-weight:500;
-}
-
 /* Creds strip */
 .hero-creds-strip{
   max-width:1380px;
@@ -1047,7 +988,7 @@ ul,ol{list-style:none}
 .proc-head .label{margin-bottom:1.25rem}
 .proc-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(8,1fr);
   gap:0;
   border-top:1px solid var(--border);
   border-left:1px solid var(--border);
@@ -1059,11 +1000,17 @@ ul,ol{list-style:none}
   border-right:1px solid var(--border);
   border-bottom:1px solid var(--border);
   position:relative;
+  grid-column:span 2;
 }
-.proc-empty{
+.proc-fill,.proc-fill-2{
   border-right:1px solid var(--border);
   border-bottom:1px solid var(--border);
+  grid-column:span 1;
 }
+/* 7 passos: linha 1 com 4 cards (cols 1-8), linha 2 com 3 cards centralizados (cols 2-7) */
+.proc-step:nth-child(6){grid-column:2 / span 2}
+.proc-step:nth-child(7){grid-column:span 2}
+.proc-step:nth-child(8){grid-column:span 2}
 .proc-step:hover{background:rgba(139,112,72,.04)}
 .proc-step::after{
   content:'';
@@ -1611,13 +1558,13 @@ ul,ol{list-style:none}
 @media(max-width:1024px){
   .nav-d{display:none}
   .ham{display:flex;position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);z-index:1200}
-  .hd{--hd-h:160px;padding:.5rem 0}
-  .hd.scrolled{--hd-h:120px}
+  .hd{--hd-h:110px;padding:.5rem 0}
+  .hd.scrolled{--hd-h:90px}
   .hd-inner{position:relative;justify-content:flex-start;min-height:calc(var(--hd-h) - 1rem)}
   .logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;z-index:1;max-width:60%}
-  .logo-img{height:130px;max-width:100%;width:auto}
-  .hd.scrolled .logo-img{height:95px}
-  .hero{padding:10rem 0 3rem}
+  .logo-img{height:90px;max-width:100%;width:auto}
+  .hd.scrolled .logo-img{height:70px}
+  .hero{padding:8rem 0 3rem}
   .hero::before{display:none}
   .hero-container{grid-template-columns:1fr;gap:2.5rem;padding:0 1.5rem}
   .hero-left{max-width:100%;text-align:center;align-items:center}
@@ -1628,9 +1575,6 @@ ul,ol{list-style:none}
   .hero-micro{text-align:center;width:100%}
   .hero-right{max-width:340px;margin:0 auto}
   .hero-img-wrap{max-width:340px}
-  .hero-photo-caption{padding:1.25rem}
-  .hero-photo-caption .name{font-size:1.125rem}
-  .hero-badge-num{width:54px;height:54px;top:.75rem;right:.75rem}
   .hero-creds-strip{grid-template-columns:repeat(2,1fr);gap:1.5rem 2rem;margin-top:2.25rem;padding-top:1.5rem}
   .hero-creds-item:nth-child(2)::after{display:none}
   .port-grid{grid-template-columns:repeat(6,1fr)}
@@ -1643,10 +1587,13 @@ ul,ol{list-style:none}
   .about-img{max-height:500px}
   .proc-grid{grid-template-columns:repeat(2,1fr)}
   .proc-step{grid-column:auto !important}
+  .proc-fill,.proc-fill-2{display:none}
   .tl-track{grid-template-columns:repeat(2,1fr)}
   .form-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .modal-details{grid-template-columns:1fr}
+  /* Padding contato e cta reduzidos no tablet */
+  html{scroll-padding-top:130px}
 }
 
 @media(max-width:768px){
@@ -1666,7 +1613,7 @@ ul,ol{list-style:none}
   .p-card-info{display:none}
   .ba-wrap{grid-template-columns:1fr}
   .proc-grid{grid-template-columns:1fr}
-  .proc-empty{display:none}
+  .proc-fill,.proc-fill-2{display:none}
   .f-row{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr;gap:2.5rem;text-align:center}
   .footer-brand{align-items:center;overflow:visible;width:100%}
@@ -2002,10 +1949,11 @@ ul,ol{list-style:none}
       <div class="proc-step"><p class="proc-n">02</p><h3>Leitura do espaço</h3><p>Análise técnica, e sensorial do ambiente — limitações, luz, proporções, e potenciais de intervenção.</p></div>
       <div class="proc-step"><p class="proc-n">03</p><h3>Conceito autoral</h3><p>Definição da identidade do projeto, linguagem, atmosfera, paleta de cores, e materiais, com direção, e estética.</p></div>
       <div class="proc-step"><p class="proc-n">04</p><h3>Direção estética</h3><p>Composição visual que integra texturas, cores, iluminação, e volumetria, em um discurso coerente.</p></div>
+      <div class="proc-fill" aria-hidden="true"></div>
       <div class="proc-step"><p class="proc-n">05</p><h3>Curadoria de materiais</h3><p>Seleção criteriosa de revestimentos, marcenaria, iluminação, e acabamentos de alta qualidade.</p></div>
       <div class="proc-step"><p class="proc-n">06</p><h3>Execução ou acompanhamento</h3><p>Gerenciamento, e supervisão quando aplicável, garantindo fidelidade absoluta ao conceito.</p></div>
       <div class="proc-step"><p class="proc-n">07</p><h3>Entrega, e refinamento</h3><p>Documentação completa, memorial descritivo, e ajustes finais para o resultado permanecer.</p></div>
-      <div class="proc-empty" aria-hidden="true"></div>
+      <div class="proc-fill-2" aria-hidden="true"></div>
     </div>
   </div>
 </section>
