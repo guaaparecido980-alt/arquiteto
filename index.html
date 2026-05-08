@@ -664,29 +664,20 @@ ul,ol{list-style:none}
    ═══════════════════════════════════════════════════════════ */
 .port{contain:layout paint}
 .port-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  margin-bottom:2.5rem;
-  flex-wrap:wrap;
-  gap:2rem;
+  text-align:center;
+  margin-bottom:4rem;
+  max-width:780px;
+  margin-left:auto;
+  margin-right:auto;
 }
-.port-header-l .label{margin-bottom:1rem}
+.port-header .label{
+  margin-bottom:1.25rem;
+  justify-content:center;
+}
+.port-header .t-xl-port{
+  margin:0 auto;
+}
 .t-xl-port{font-family:var(--ff-d);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;line-height:1.1;letter-spacing:-.02em}
-
-.filters{display:flex;gap:.25rem;flex-wrap:wrap}
-.fbtn{
-  padding:.5rem 1.25rem;
-  font-family:var(--ff-l);
-  font-size:.5625rem;
-  font-weight:500;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--stone);
-  border:1px solid transparent;
-  transition:color .2s ease,border-color .2s ease;
-}
-.fbtn:hover,.fbtn.on{color:var(--gold);border-color:var(--border-h)}
 
 .port-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.25rem}
 .p-card{position:relative;cursor:pointer;overflow:hidden;contain:layout paint}
@@ -1626,8 +1617,6 @@ ul,ol{list-style:none}
   .footer-lgpd{text-align:center}
   .modal-gal{grid-template-columns:1fr}
   .tl-track{grid-template-columns:1fr}
-  .filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:.5rem;-webkit-overflow-scrolling:touch}
-  .fbtn{white-space:nowrap}
   .wa{bottom:calc(1.25rem + env(safe-area-inset-bottom));right:1.25rem;width:48px;height:48px}
   .p-card:hover .p-card-img .ph{transform:none}
 }
@@ -1760,17 +1749,8 @@ ul,ol{list-style:none}
 <section class="port sec cv" id="portfolio">
   <div class="container">
     <div class="port-header">
-      <div class="port-header-l">
-        <span class="label" data-chapter="01 / 05">Portfólio</span>
-        <h2 class="t-xl t-xl-port draws" style="margin-top:1rem">Projetos em destaque</h2>
-      </div>
-      <div class="filters">
-        <button class="fbtn on" data-filter="all">Todos</button>
-        <button class="fbtn" data-filter="residencial">Residencial</button>
-        <button class="fbtn" data-filter="interiores">Interiores</button>
-        <button class="fbtn" data-filter="compactos">Compactos</button>
-        <button class="fbtn" data-filter="comercial">Comercial</button>
-      </div>
+      <span class="label" data-chapter="01 / 05">Portfólio</span>
+      <h2 class="t-xl t-xl-port draws">Projetos em destaque</h2>
     </div>
     <div class="port-grid" id="portGrid">
       <div class="p-card" data-cat="residencial autoral" data-p="1">
@@ -2187,22 +2167,8 @@ navM.addEventListener('click',function(e){
   }
 });
 
-/* ── FILTROS ──────────────────────────────────────── */
-var fbtns=doc.querySelectorAll('.fbtn');
-var cards=doc.querySelectorAll('.p-card');
-fbtns.forEach(function(b){
-  b.addEventListener('click',function(){
-    fbtns.forEach(function(x){x.classList.remove('on')});
-    b.classList.add('on');
-    var f=b.dataset.filter;
-    cards.forEach(function(c){
-      var show=f==='all'||c.dataset.cat.indexOf(f)!==-1;
-      c.style.display=show?'':'none';
-    });
-  });
-});
-
 /* ── MODAL ──────────────────────────────────────── */
+var cards=doc.querySelectorAll('.p-card');
 var modal=doc.getElementById('modal');
 var mX=doc.getElementById('modalX');
 var mHeader=doc.getElementById('mHeader');
