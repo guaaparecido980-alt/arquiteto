@@ -953,19 +953,7 @@ ul,ol{list-style:none}
 .sec.dark .about-photo{filter:brightness(.95) contrast(1.05)}
 
 /* Signature */
-.signature-sec{padding:clamp(7rem,12vw,11rem) 0;background:var(--bg-alt);contain:layout paint;position:relative}
-.signature-sec::before,.signature-sec::after{
-  content:'';
-  position:absolute;
-  left:50%;
-  width:1px;
-  height:64px;
-  background:var(--gold);
-  transform:translateX(-50%);
-  opacity:.4;
-}
-.signature-sec::before{top:0}
-.signature-sec::after{bottom:0}
+.signature-sec{padding:clamp(4rem,7vw,6rem) 0;background:var(--bg-alt);contain:layout paint;position:relative}
 .signature-inner{max-width:780px;margin:0 auto;text-align:center;position:relative}
 .signature-inner .label{margin-bottom:2.5rem;justify-content:center}
 /* Monograma WA — assinatura tipográfica */
@@ -1003,13 +991,6 @@ ul,ol{list-style:none}
   letter-spacing:-.005em;
 }
 .signature-text em{font-style:italic;color:var(--gold);font-weight:300}
-.signature-line{
-  width:1px;
-  height:48px;
-  background:linear-gradient(to bottom,transparent,var(--gold),transparent);
-  opacity:.4;
-  margin:2.5rem auto 0;
-}
 
 /* ═══════════════════════════════════════════════════════════
    TIMELINE
@@ -2003,7 +1984,6 @@ ul,ol{list-style:none}
       <p class="signature-text" style="margin-top:0">Seu trabalho, é marcado por uma linguagem contemporânea, onde o <em>luxo</em>, é tratado com equilíbrio, <em>leveza</em>, e intenção.</p>
       <p class="signature-text">Linhas limpas, materiais refinados, texturas bem definidas, e uma curadoria cuidadosa, criam espaços sofisticados, porém sempre funcionais, e conectados ao estilo de vida de cada cliente.</p>
       <p class="signature-text">Cada projeto nasce de uma leitura estratégica — unindo estética, proporção, e execução — resultando em ambientes que não apenas impressionam, mas permanecem.</p>
-      <div class="signature-line" aria-hidden="true"></div>
     </div>
   </div>
 </section>
